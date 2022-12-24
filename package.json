@@ -1,0 +1,17 @@
+{
+  "name": "open-ai-slack-bolt-integration-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Kevin Zhuang",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/bolt": "^3.12.2",
+    "dotenv": "^16.0.3",
+    "openai": "^3.1.0",
+    "request": "^2.88.2"
+  }
+}
