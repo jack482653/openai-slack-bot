@@ -6,9 +6,9 @@
  * @slack/bolt requires at least NodeJs version 12.13.0
  */
 const { App } = require("@slack/bolt");
-const request = require("request");
 require("dotenv").config();
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const { openAIApi, OpenAICommand } = require("./OpenAICommand");
+
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -18,41 +18,11 @@ const app = new App({
   // you still need to listen on some port!
   port: process.env.PORT || 3000,
 });
-
-function callOpenAi(message) {
-  return new Promise((resolve, reject) => {
-    request.post(
-      {
-        url: "https://api.openai.com/v1/completions",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
-        },
-        json: {
-          model: "text-davinci-003",
-          prompt: message,
-          temperature: 0.7,
-          max_tokens: 1000,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-        },
-      },
-      (error, response, body) => {
-        if (error) {
-          reject(error);
-        } else {
-          const answer = body.choices[0].text;
-          resolve(answer);
-        }
-      }
-    );
-  });
-}
+const openAICommand = new OpenAICommand(openAIApi);
 
 app.event("app_mention", async ({ event, context, client, say }) => {
   try {
-    let answer = await callOpenAi(event.text);
+    const answer = await openAICommand.createCompletion(event.text);
     await say({
       blocks: [
         {
