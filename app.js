@@ -20,7 +20,7 @@ const app = new App({
 });
 const openAICommand = new OpenAICommand(openAIApi);
 
-app.event("app_mention", async ({ event, context, client, say }) => {
+app.event("app_mention", async ({ event, say }) => {
   try {
     const answer = await openAICommand.createCompletion(event.text);
     await say({
@@ -31,6 +31,36 @@ app.event("app_mention", async ({ event, context, client, say }) => {
             type: "mrkdwn",
             text: `<@${event.user}> ${answer}`,
           },
+        },
+      ],
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.command("/gen_image", async ({ command, ack, say }) => {
+  try {
+    await ack(); // Acknowledge command request
+    const url = await openAICommand.generateImage(command.text);
+    await say({
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `<@${command.user_id}> ${url}`,
+          },
+        },
+        {
+          type: "image",
+          title: {
+            type: "plain_text",
+            text: command.text,
+            emoji: true,
+          },
+          image_url: url,
+          alt_text: "generated from OpenAI",
         },
       ],
     });
