@@ -26,13 +26,14 @@ class OpenAICommand {
   }
 
   async generateImage(prompt) {
-    const response = await this.openAIApi.createImage({
+    const res = await this.openAIApi.createImage({
       prompt: prompt,
       n: 1,
       size: "512x512",
+      response_format: "b64_json",
     });
 
-    return response.data.data[0].url;
+    return res.data.data[0].b64_json;
   }
 }
 
