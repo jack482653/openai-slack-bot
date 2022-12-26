@@ -42,7 +42,17 @@ app.event("app_mention", async ({ event, say }) => {
 app.command("/gen_image", async ({ command, ack, say }) => {
   try {
     await ack(); // Acknowledge command request
-    const url = await openAICommand.generateImage(command.text);
+    const base64Str = await openAICommand.generateImage(command.text);
+    const buffer = Buffer.from(base64Str, "base64");
+
+    const res = await app.client.files.upload({
+      file: buffer,
+      filename: "image.png",
+      filetype: "auto",
+      title: command.text,
+      initial_comment: `<@${command.user_id}> ${command.text}`,
+    });
+
     await say({
       blocks: [
         {
@@ -59,7 +69,7 @@ app.command("/gen_image", async ({ command, ack, say }) => {
             text: command.text,
             emoji: true,
           },
-          image_url: url,
+          image_url: res.file.permalink,
           alt_text: "generated from OpenAI",
         },
       ],
