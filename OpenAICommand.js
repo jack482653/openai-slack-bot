@@ -4,9 +4,9 @@ require("dotenv").config();
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export const openAIApi = new OpenAIApi(configuration);
+const openAIApi = new OpenAIApi(configuration);
 
-export class OpenAICommand extends Command {
+class OpenAICommand extends Command {
   constructor(openAIApi) {
     this.openAIApi = openAIApi;
   }
@@ -25,3 +25,8 @@ export class OpenAICommand extends Command {
     return completion.choices[0].text;
   }
 }
+
+module.exports = {
+  openAIApi,
+  OpenAICommand,
+};
