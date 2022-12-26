@@ -59,7 +59,7 @@ app.command("/gen_image", async ({ command, ack, say }) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `<@${command.user_id}> ${url}`,
+            text: `<@${command.user_id}> ${command.text}`,
           },
         },
         {
