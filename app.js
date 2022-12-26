@@ -44,7 +44,6 @@ app.command("/gen_image", async ({ command, ack, say }) => {
     await ack(); // Acknowledge command request
     const base64Str = await openAICommand.generateImage(command.text);
     const buffer = Buffer.from(base64Str, "base64");
-
     await say({
       blocks: [
         {
