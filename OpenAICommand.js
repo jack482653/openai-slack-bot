@@ -24,6 +24,16 @@ class OpenAICommand {
 
     return completion.data.choices[0].text;
   }
+
+  async generateImage(prompt) {
+    const response = await this.openAIApi.createImage({
+      prompt: prompt,
+      n: 1,
+      size: "512x512",
+    });
+
+    return response.data.data[0].url;
+  }
 }
 
 module.exports = {
