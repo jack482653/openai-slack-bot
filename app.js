@@ -45,12 +45,16 @@ app.command("/gen_image", async ({ command, ack, say }) => {
     const base64Str = await openAICommand.generateImage(command.text);
     const buffer = Buffer.from(base64Str, "base64");
 
-    const res = await app.client.files.upload({
+    const filesUploadRes = await app.client.files.upload({
       file: buffer,
       filename: "image.png",
       filetype: "auto",
       title: command.text,
       initial_comment: `<@${command.user_id}> ${command.text}`,
+    });
+
+    const sharedPublicUrlRes = await app.client.files.sharedPublicURL({
+      file: filesUploadRes.file.id,
     });
 
     await say({
@@ -69,7 +73,7 @@ app.command("/gen_image", async ({ command, ack, say }) => {
             text: command.text,
             emoji: true,
           },
-          image_url: res.file.permalink,
+          image_url: sharedPublicUrlRes.file.permalink_public,
           alt_text: "generated from OpenAI",
         },
       ],
