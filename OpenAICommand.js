@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openAIApi = new OpenAIApi(configuration);
 
-class OpenAICommand extends Command {
+class OpenAICommand {
   constructor(openAIApi) {
     this.openAIApi = openAIApi;
   }
