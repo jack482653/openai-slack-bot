@@ -22,7 +22,7 @@ class OpenAICommand {
       presence_penalty: 0,
     });
 
-    return completion.choices[0].text;
+    return completion.data.choices[0].text;
   }
 }
 
