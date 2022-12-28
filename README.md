@@ -1,6 +1,7 @@
 # openai-slack-bot
 A OpenAI Slack bot inspired from [@kvzhuang](https://gist.github.com/kvzhuang)
 Orignial source code: https://gist.github.com/kvzhuang/357b83499d3edcc099512d47a4a1b646
+![image](https://user-images.githubusercontent.com/6816342/209771710-0943aba3-2c56-4f5c-92d5-c60f8ac67ec7.png)
 
 ## Prerequisites
 
