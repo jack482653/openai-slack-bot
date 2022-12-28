@@ -2,7 +2,7 @@ version: '3'
 
 services:
   openai-slack-bot:
-    image: openai-slack-bot
+    image: ghcr.io/jack482653/openai-slack-bot:latest
     restart: always
     environment:
     - OPENAI_API_KEY=${OPENAI_API_KEY}
