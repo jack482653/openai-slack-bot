@@ -1,7 +1,18 @@
 # openai-slack-bot
 A OpenAI Slack bot inspired from [@kvzhuang](https://gist.github.com/kvzhuang)
 Orignial source code: https://gist.github.com/kvzhuang/357b83499d3edcc099512d47a4a1b646
-![image](https://user-images.githubusercontent.com/6816342/209771710-0943aba3-2c56-4f5c-92d5-c60f8ac67ec7.png)
+
+## Functions
+Ask bot something...
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/209771710-0943aba3-2c56-4f5c-92d5-c60f8ac67ec7.png">
+
+Generate image:
+```
+/gen_image [prompt]
+```
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/209779765-bd0892e9-fded-4a80-9d7c-4c0b3933accb.png">
+
 
 ## Prerequisites
 
