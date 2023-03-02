@@ -7,7 +7,7 @@
  */
 const { App } = require("@slack/bolt");
 require("dotenv").config();
-const { openAIApi, OpenAICommand } = require("./OpenAICommand");
+const { openAIApi, OpenAICommand, roles } = require("./OpenAICommand");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -22,7 +22,11 @@ const openAICommand = new OpenAICommand(openAIApi);
 
 app.event("app_mention", async ({ event, say }) => {
   try {
-    const answer = await openAICommand.createCompletion(event.text);
+    const answer = await openAICommand.createSingleChatCompletion(
+      roles.USER,
+      event.text
+    );
+
     await say({
       blocks: [
         {
