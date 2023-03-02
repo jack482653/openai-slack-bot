@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@5x/enumjs@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@5x/enumjs/-/enumjs-1.0.6.tgz#9e443569c1ec476b6040c1ef6ce2188196552934"
+  integrity sha512-otjHwAZ0wlVdBwr6k9EZp8k5D8syq1UfyP+UkQSvsQ+bPIs275DQnw8OzUT0fX7XmDXsFDGRgenJVjdyqPKzGw==
+
 "@slack/bolt@^3.12.2":
   version "3.12.2"
   resolved "https://registry.npmjs.org/@slack/bolt/-/bolt-3.12.2.tgz"
@@ -1068,10 +1073,10 @@ on-finished@2.4.1:
   dependencies:
     ee-first "1.1.1"
 
-openai@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/openai/-/openai-3.1.0.tgz#13bfb228cf777155b882c2deb3a03bc5094cb7b3"
-  integrity sha512-v5kKFH5o+8ld+t0arudj833Mgm3GcgBnbyN9946bj6u7bvel4Yg6YFz2A4HLIYDzmMjIo0s6vSG9x73kOwvdCg==
+openai@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-3.2.1.tgz#1fa35bdf979cbde8453b43f2dd3a7d401ee40866"
+  integrity sha512-762C9BNlJPbjjlWZi4WYK9iM2tAVAv0uUp1UmI34vb0CN5T2mjB/qM6RYBmNKMh/dN9fC+bxqPwWJZUTWW052A==
   dependencies:
     axios "^0.26.0"
     form-data "^4.0.0"

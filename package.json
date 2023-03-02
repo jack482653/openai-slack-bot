@@ -9,9 +9,10 @@
   "author": "Kevin Zhuang",
   "license": "ISC",
   "dependencies": {
+    "@5x/enumjs": "^1.0.6",
     "@slack/bolt": "^3.12.2",
     "dotenv": "^16.0.3",
-    "openai": "^3.1.0",
+    "openai": "^3.2.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
