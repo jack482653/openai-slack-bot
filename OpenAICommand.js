@@ -1,6 +1,6 @@
-const Config = require("./Config");
 const { Configuration, OpenAIApi } = require("openai");
 const Enum = require("@5x/enumjs");
+require("dotenv").config();
 
 const roles = new Enum();
 roles.defineEnumProperty("USER", "user");
