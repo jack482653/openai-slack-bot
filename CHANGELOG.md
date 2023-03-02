@@ -1,3 +1,15 @@
+## v1.1.2 (2023-03-02)
+
+### Fix
+
+- **OpenAICommand.js**: fix config again QQ
+
+## v1.1.1 (2023-03-02)
+
+### Fix
+
+- **OpenAICommand.js**: fix config
+
 ## v1.1.0 (2023-03-02)
 
 ### Feat
