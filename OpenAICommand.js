@@ -8,7 +8,7 @@ roles.defineEnumProperty("SYSTEM", "system");
 roles.defineEnumProperty("ASSISTANT", "assistant");
 
 const configuration = new Configuration({
-  apiKey: Config.getValue("ACCESS_TOKEN"),
+  apiKey: process.env.OPENAI_API_KEY,
 });
 const openAIApi = new OpenAIApi(configuration);
 
