@@ -43,6 +43,27 @@ app.event("app_mention", async ({ event, say }) => {
   }
 });
 
+app.command("/fate", async ({ command, ack, say }) => {
+  try {
+    await ack(); // Acknowledge command request
+    const answer = await openAICommand.tellMeMyFate();
+
+    await say({
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `<@${command.user_id}> ${answer}`,
+          },
+        },
+      ],
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 app.command("/gen_image", async ({ command, ack, say }) => {
   try {
     await ack(); // Acknowledge command request
