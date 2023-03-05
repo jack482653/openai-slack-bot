@@ -1,10 +1,10 @@
 const roles = require("./roles");
-require("dotenv").config();
 
 class OpenAICommand {
-  constructor(openAIApi, cache) {
+  constructor(openAIApi, cache, config) {
     this.openAIApi = openAIApi;
     this.cache = cache;
+    this.config = config;
   }
 
   async createCompletion(prompt, options) {
@@ -29,11 +29,11 @@ class OpenAICommand {
     // consider response from OpenAI, we keep only the last N - 1 messages
     lastMessages = lastMessages.slice(-this.getNumOfMessages() + 1);
 
-    const systemMessages = process.env.OPENAI_CHAT_SYSTEM_MESSAGE
+    const systemMessages = this.config.chat.systemMessage
       ? [
           {
             role: roles.SYSTEM,
-            content: process.env.OPENAI_CHAT_SYSTEM_MESSAGE,
+            content: this.config.chat.systemMessage,
           },
         ]
       : [];
@@ -47,7 +47,7 @@ class OpenAICommand {
     this.cache.set(
       id,
       [...lastMessages, { role: roles.ASSISTANT, content: res }],
-      process.env.OPENAI_CHAT_TTL
+      this.config.chat.ttl
     );
 
     console.info(this.cache.get(id));
@@ -56,19 +56,17 @@ class OpenAICommand {
   }
 
   getNumOfMessages() {
-    if (typeof process.env.OPENAI_CHAT_NUM_OF_MESSAGES === "undefined") {
-      return 2;
-    }
+    const numOfMessages = this.config.chat.numOfMessages;
 
-    if (process.env.OPENAI_CHAT_NUM_OF_MESSAGES < 2) {
+    if (numOfMessages < 2) {
       throw new Error("OPENAI_CHAT_NUM_OF_MESSAGES must be >= 2.");
     }
 
-    if (process.env.OPENAI_CHAT_NUM_OF_MESSAGES % 2 !== 0) {
+    if (numOfMessages % 2 !== 0) {
       throw new Error("OPENAI_CHAT_NUM_OF_MESSAGES must be an even number.");
     }
 
-    return process.env.OPENAI_CHAT_NUM_OF_MESSAGES;
+    return numOfMessages;
   }
 
   async createSingleChatCompletion(role, message, options) {

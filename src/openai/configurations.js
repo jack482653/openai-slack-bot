@@ -1,9 +1,9 @@
 const { Configuration, OpenAIApi } = require("openai");
 const Cache = require("../Cache");
-require("dotenv").config();
+const config = require("../config");
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: config.openAI.apiKey,
 });
 const openAIApi = new OpenAIApi(configuration);
 const cache = new Cache();
