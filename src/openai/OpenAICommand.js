@@ -1,11 +1,5 @@
-const { Configuration, OpenAIApi } = require("openai");
 const roles = require("./roles");
 require("dotenv").config();
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openAIApi = new OpenAIApi(configuration);
 
 class OpenAICommand {
   constructor(openAIApi) {
@@ -70,7 +64,4 @@ class OpenAICommand {
   }
 }
 
-module.exports = {
-  openAIApi,
-  OpenAICommand,
-};
+module.exports = OpenAICommand;
