@@ -1,11 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
-const Enum = require("@5x/enumjs");
+const roles = require("./roles");
 require("dotenv").config();
-
-const roles = new Enum();
-roles.defineEnumProperty("USER", "user");
-roles.defineEnumProperty("SYSTEM", "system");
-roles.defineEnumProperty("ASSISTANT", "assistant");
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -78,5 +73,4 @@ class OpenAICommand {
 module.exports = {
   openAIApi,
   OpenAICommand,
-  roles,
 };
