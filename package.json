@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "test": "mocha"
   },
   "author": "Kevin Zhuang",
   "license": "ISC",
@@ -17,6 +18,8 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "prettier": "2.8.1"
   }
 }
