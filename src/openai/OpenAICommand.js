@@ -50,8 +50,6 @@ class OpenAICommand {
       this.config.chat.ttl
     );
 
-    console.info(this.cache.get(id));
-
     return res;
   }
 
