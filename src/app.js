@@ -19,7 +19,7 @@ const app = new App({
   // you still need to listen on some port!
   port: config.port,
 });
-const openAICommand = new OpenAICommand(openAIApi, cache);
+const openAICommand = new OpenAICommand(openAIApi, cache, config.openAI);
 
 app.event("app_mention", async ({ event, say }) => {
   try {
