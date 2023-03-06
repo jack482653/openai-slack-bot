@@ -1,3 +1,23 @@
+## v1.2.0 (2023-03-06)
+
+### Feat
+
+- **src/app.js**: use chat(). Now response is based on previous conversations.
+- **src/openai/OpenAICommand.js**: add chat(), which previous conversations is cached
+- **src/Cache.js**: add cache
+
+### Fix
+
+- **src/app.js**: pass config when initializing OpenAICommand
+
+### Refactor
+
+- **src/openai/OpenAICommand.js**: remove testing log
+- extract config.js
+- **src/openai/OpenAICommand.js**: extract configurations.js
+- **src/openai/OpenAICommand.js**: extract roles.js
+- move code file to src folder
+
 ## v1.1.2 (2023-03-02)
 
 ### Fix
