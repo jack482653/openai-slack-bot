@@ -24,11 +24,13 @@ const openAICommand = new OpenAICommand(openAIApi, cache, config.openAI);
 
 app.event("app_mention", async ({ event, say }) => {
   try {
-    const answer = await openAICommand.chat(event.user, event.text, {
-      user: event.user,
+    const id = `${event.channel}_${event.user}`;
+    const answer = await openAICommand.chat(id, event.text, {
+      user: id,
     });
 
     await say({
+      text: answer,
       blocks: [
         {
           type: "section",
@@ -39,6 +41,19 @@ app.event("app_mention", async ({ event, say }) => {
         },
       ],
     });
+  } catch (error) {
+    logger.error(error);
+  }
+});
+
+app.message(async ({ event, say }) => {
+  try {
+    const id = event.user;
+    const answer = await openAICommand.chat(id, event.text, {
+      user: id,
+    });
+
+    await say(answer);
   } catch (error) {
     logger.error(error);
   }
