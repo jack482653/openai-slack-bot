@@ -2,9 +2,10 @@
   "name": "open-ai-slack-bolt-integration-sample",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node src/app.js",
+    "test": "mocha"
   },
   "author": "Kevin Zhuang",
   "license": "ISC",
@@ -12,10 +13,13 @@
     "@5x/enumjs": "^1.0.6",
     "@slack/bolt": "^3.12.2",
     "dotenv": "^16.0.3",
+    "node-cache": "^5.1.2",
     "openai": "^3.2.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "prettier": "2.8.1"
   }
 }

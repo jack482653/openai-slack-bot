@@ -1,20 +1,10 @@
-const { Configuration, OpenAIApi } = require("openai");
-const Enum = require("@5x/enumjs");
-require("dotenv").config();
-
-const roles = new Enum();
-roles.defineEnumProperty("USER", "user");
-roles.defineEnumProperty("SYSTEM", "system");
-roles.defineEnumProperty("ASSISTANT", "assistant");
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openAIApi = new OpenAIApi(configuration);
+const roles = require("./roles");
 
 class OpenAICommand {
-  constructor(openAIApi) {
+  constructor(openAIApi, cache, config) {
     this.openAIApi = openAIApi;
+    this.cache = cache;
+    this.config = config;
   }
 
   async createCompletion(prompt, options) {
@@ -30,6 +20,51 @@ class OpenAICommand {
     });
 
     return completion.data.choices[0].text;
+  }
+
+  async chat(id, message, options) {
+    // get last messages from cache
+    let lastMessages = this.cache.get(id) ?? [];
+    lastMessages = [...lastMessages, { role: roles.USER, content: message }];
+    // consider response from OpenAI, we keep only the last N - 1 messages
+    lastMessages = lastMessages.slice(-this.getNumOfMessages() + 1);
+
+    const systemMessages = this.config.chat.systemMessage
+      ? [
+          {
+            role: roles.SYSTEM,
+            content: this.config.chat.systemMessage,
+          },
+        ]
+      : [];
+
+    const res = await this.createChatCompletion(
+      [...systemMessages, ...lastMessages],
+      options
+    );
+
+    // Add the assistant's response to the array of messages and update the cache
+    this.cache.set(
+      id,
+      [...lastMessages, { role: roles.ASSISTANT, content: res }],
+      this.config.chat.ttl
+    );
+
+    return res;
+  }
+
+  getNumOfMessages() {
+    const numOfMessages = this.config.chat.numOfMessages;
+
+    if (numOfMessages < 2) {
+      throw new Error("OPENAI_CHAT_NUM_OF_MESSAGES must be >= 2.");
+    }
+
+    if (numOfMessages % 2 !== 0) {
+      throw new Error("OPENAI_CHAT_NUM_OF_MESSAGES must be an even number.");
+    }
+
+    return numOfMessages;
   }
 
   async createSingleChatCompletion(role, message, options) {
@@ -75,8 +110,4 @@ class OpenAICommand {
   }
 }
 
-module.exports = {
-  openAIApi,
-  OpenAICommand,
-  roles,
-};
+module.exports = OpenAICommand;

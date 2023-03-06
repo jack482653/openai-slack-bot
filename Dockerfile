@@ -1,6 +1,6 @@
 FROM node:16.15.0-alpine
 
-COPY ./*.js /opt/openai-slack-bot/
+COPY ./src /opt/openai-slack-bot/src
 COPY ./package.json /opt/openai-slack-bot/
 COPY ./yarn.lock /opt/openai-slack-bot/
 

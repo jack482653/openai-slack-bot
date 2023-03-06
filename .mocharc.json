@@ -1,0 +1,7 @@
+{
+  "recursive": true,
+  "reporter": "nyan",
+  "ui": "bdd",
+  "require": "dotenv/config",
+  "spec": ["src/**/*.test.js"]
+}

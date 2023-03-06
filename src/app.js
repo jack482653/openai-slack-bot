@@ -6,26 +6,26 @@
  * @slack/bolt requires at least NodeJs version 12.13.0
  */
 const { App } = require("@slack/bolt");
-require("dotenv").config();
-const { openAIApi, OpenAICommand, roles } = require("./OpenAICommand");
+const config = require("./config");
+const { cache, openAIApi } = require("./openai/configurations");
+const OpenAICommand = require("./openai/OpenAICommand");
 
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: config.slack.botToken,
+  signingSecret: config.slack.signingSecret,
   socketMode: true,
-  appToken: process.env.SLACK_APP_TOKEN,
+  appToken: config.slack.appToken,
   // Socket Mode doesn't listen on a port, but in case you want your app to respond to OAuth,
   // you still need to listen on some port!
-  port: process.env.PORT || 3000,
+  port: config.port,
 });
-const openAICommand = new OpenAICommand(openAIApi);
+const openAICommand = new OpenAICommand(openAIApi, cache, config.openAI);
 
 app.event("app_mention", async ({ event, say }) => {
   try {
-    const answer = await openAICommand.createSingleChatCompletion(
-      roles.USER,
-      event.text
-    );
+    const answer = await openAICommand.chat(event.user, event.text, {
+      user: event.user,
+    });
 
     await say({
       blocks: [
