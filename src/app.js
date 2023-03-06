@@ -9,6 +9,7 @@ const { App } = require("@slack/bolt");
 const config = require("./config");
 const { cache, openAIApi } = require("./openai/configurations");
 const OpenAICommand = require("./openai/OpenAICommand");
+const logger = require("./logger").getLogger("app");
 
 const app = new App({
   token: config.slack.botToken,
@@ -39,7 +40,7 @@ app.event("app_mention", async ({ event, say }) => {
       ],
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 });
 
@@ -60,7 +61,7 @@ app.command("/fate", async ({ command, ack, say }) => {
       ],
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 });
 
@@ -88,7 +89,7 @@ app.command("/gen_image", async ({ command, ack, say }) => {
       title: command.text,
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 });
 
@@ -96,5 +97,5 @@ app.command("/gen_image", async ({ command, ack, say }) => {
   // Start your app
   await app.start();
 
-  console.log("⚡️ Bolt app is running!");
+  logger.log("⚡️ Bolt app is running!");
 })();
