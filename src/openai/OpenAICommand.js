@@ -1,4 +1,5 @@
 const roles = require("./roles");
+const logger = require("../logger").getLogger("OpenAICommand");
 
 class OpenAICommand {
   constructor(openAIApi, cache, config) {
@@ -49,6 +50,8 @@ class OpenAICommand {
       [...lastMessages, { role: roles.ASSISTANT, content: res }],
       this.config.chat.ttl
     );
+
+    logger.log("cached messages: ", this.cache.get(id));
 
     return res;
   }
