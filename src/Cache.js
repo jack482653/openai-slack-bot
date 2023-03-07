@@ -6,11 +6,23 @@ class Cache {
   }
 
   get(key) {
+    if (this.isKeyEmpty(key)) {
+      return null;
+    }
+
     return this.cache.get(key);
   }
 
   set(key, value, ttl) {
+    if (this.isKeyEmpty(key)) {
+      return;
+    }
+
     this.cache.set(key, value, ttl);
+  }
+
+  isKeyEmpty(key) {
+    return typeof key === "undefined" || key === null;
   }
 }
 
