@@ -28,7 +28,7 @@ This document is polished by ChatGPT :P .
 
 #### Use App Manifest
 
-You can easily create a pre-configured Slack app by [click this link](https://api.slack.com/apps?new_app=1&manifest_yaml=display_information%3A%0A%20%20name%3A%20OpenAI%20Chat%0A%20%20description%3A%20An%20OpenAI%20Slack%20bot%0Afeatures%3A%0A%20%20app_home%3A%0A%20%20%20%20home_tab_enabled%3A%20false%0A%20%20%20%20messages_tab_enabled%3A%20true%0A%20%20%20%20messages_tab_read_only_enabled%3A%20false%0A%20%20bot_user%3A%0A%20%20%20%20display_name%3A%20OpenAI%20Chat%0A%20%20%20%20always_online%3A%20true%0A%20%20slash_commands%3A%0A%20%20%20%20-%20command%3A%20%2Fgen_image%0A%20%20%20%20%20%20description%3A%20Generate%20image%20from%20OpenAI%0A%20%20%20%20%20%20usage_hint%3A%20%22%5Ba%20white%20siamese%20cat%5D%22%0A%20%20%20%20%20%20should_escape%3A%20false%0Aoauth_config%3A%0A%20%20scopes%3A%0A%20%20%20%20user%3A%0A%20%20%20%20%20%20-%20files%3Awrite%0A%20%20%20%20bot%3A%0A%20%20%20%20%20%20-%20app_mentions%3Aread%0A%20%20%20%20%20%20-%20chat%3Awrite%0A%20%20%20%20%20%20-%20chat%3Awrite.customize%0A%20%20%20%20%20%20-%20chat%3Awrite.public%0A%20%20%20%20%20%20-%20commands%0A%20%20%20%20%20%20-%20files%3Awrite%0A%20%20%20%20%20%20-%20im%3Ahistory%0Asettings%3A%0A%20%20event_subscriptions%3A%0A%20%20%20%20bot_events%3A%0A%20%20%20%20%20%20-%20app_mention%0A%20%20%20%20%20%20-%20message.im%0A%20%20interactivity%3A%0A%20%20%20%20is_enabled%3A%20true%0A%20%20org_deploy_enabled%3A%20false%0A%20%20socket_mode_enabled%3A%20true%0A%20%20token_rotation_enabled%3A%20false).
+You can easily create a pre-configured Slack app by [click this link](https://api.slack.com/apps?new_app=1&manifest_yaml=display_information%3A%0A%20%20name%3A%20OpenAI%20Chat%0A%20%20description%3A%20An%20OpenAI%20Slack%20bot%0Afeatures%3A%0A%20%20app_home%3A%0A%20%20%20%20home_tab_enabled%3A%20false%0A%20%20%20%20messages_tab_enabled%3A%20true%0A%20%20%20%20messages_tab_read_only_enabled%3A%20false%0A%20%20bot_user%3A%0A%20%20%20%20display_name%3A%20OpenAI%20Chat%0A%20%20%20%20always_online%3A%20true%0A%20%20slash_commands%3A%0A%20%20%20%20-%20command%3A%20%2Fgen_image%0A%20%20%20%20%20%20description%3A%20Generate%20image%20from%20OpenAI%0A%20%20%20%20%20%20usage_hint%3A%20%22%5Ba%20white%20siamese%20cat%5D%22%0A%20%20%20%20%20%20should_escape%3A%20false%0Aoauth_config%3A%0A%20%20scopes%3A%0A%20%20%20%20bot%3A%0A%20%20%20%20%20%20-%20app_mentions%3Aread%0A%20%20%20%20%20%20-%20chat%3Awrite%0A%20%20%20%20%20%20-%20chat%3Awrite.customize%0A%20%20%20%20%20%20-%20chat%3Awrite.public%0A%20%20%20%20%20%20-%20commands%0A%20%20%20%20%20%20-%20files%3Awrite%0A%20%20%20%20%20%20-%20im%3Ahistory%0Asettings%3A%0A%20%20event_subscriptions%3A%0A%20%20%20%20bot_events%3A%0A%20%20%20%20%20%20-%20app_mention%0A%20%20%20%20%20%20-%20message.im%0A%20%20interactivity%3A%0A%20%20%20%20is_enabled%3A%20true%0A%20%20org_deploy_enabled%3A%20false%0A%20%20socket_mode_enabled%3A%20true%0A%20%20token_rotation_enabled%3A%20false).
 
 This is done by Slack App Manifest. You can also manually copy the manifest below, and paste while creating Slack app.
 
@@ -51,8 +51,6 @@ features:
       should_escape: false
 oauth_config:
   scopes:
-    user:
-      - files:write
     bot:
       - app_mentions:read
       - chat:write
@@ -79,11 +77,11 @@ settings:
 2. Enable Socket Mode on the `Socket Mode` page.
 3. On the `OAuth & Permissions` page, add the following scopes to `Scopes > Bot Token Scopes`:
 
-![image](https://user-images.githubusercontent.com/6816342/209769237-52a1cae1-3d75-43e6-8f90-5e1250cfe947.png)
+![image](https://user-images.githubusercontent.com/6816342/223335220-42e4c2dd-cc83-4392-8960-3378fdd6433d.png)
 
-4. Enable Events and subscribe to the `app_mention` user bot event on the `Event Subscriptions` page:
+4. Enable Events and subscribe to the `app_mention` and `message.im` bot events on the `Event Subscriptions` page:
 
-![image](https://user-images.githubusercontent.com/6816342/209769765-b38c19bf-f2d8-4225-82f8-bf8934b4b88b.png)
+![image](https://user-images.githubusercontent.com/6816342/223334464-8b85ae11-2921-4b18-a6a2-02a4598f9121.png)
 
 5. Add the `/gen_image` command on the `Slash Commands` page:
 
