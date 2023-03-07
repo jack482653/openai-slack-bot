@@ -8,9 +8,13 @@ This document is polished by ChatGPT :P .
 
 ## Functions
 
-- Ask the bot a question and it will generate a response:
+- Mention bot and ask the bot a question at channel. Tt will generate a response:
 
 <img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/209771710-0943aba3-2c56-4f5c-92d5-c60f8ac67ec7.png">
+
+- Directly have a converstion with the bot:
+
+<img width="372" alt="image" src="https://user-images.githubusercontent.com/6816342/223357511-91ceb512-8773-4fbd-879f-dce599cf9dd2.png">
 
 - Generate an image based on a prompt:
 ```
