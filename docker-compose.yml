@@ -4,6 +4,10 @@ services:
   openai-slack-bot:
     image: ghcr.io/jack482653/openai-slack-bot:latest
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5g"
     environment:
     - OPENAI_API_KEY=${OPENAI_API_KEY}
     - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
