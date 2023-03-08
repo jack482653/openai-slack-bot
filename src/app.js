@@ -23,6 +23,8 @@ const app = new App({
 const openAICommand = new OpenAICommand(openAIApi, cache, config.openAI);
 
 app.event("app_mention", async ({ event, say }) => {
+  logger.debug("app_mention", event);
+
   try {
     const id = `${event.channel}_${event.user}`;
     const answer = await openAICommand.chat(id, event.text, {
@@ -41,12 +43,16 @@ app.event("app_mention", async ({ event, say }) => {
         },
       ],
     });
+
+    logger.debug("app_mention completed");
   } catch (error) {
     logger.error(error);
   }
 });
 
 app.message(async ({ event, say }) => {
+  logger.debug("message", event);
+
   try {
     const id = event.user;
     const answer = await openAICommand.chat(id, event.text, {
@@ -54,12 +60,16 @@ app.message(async ({ event, say }) => {
     });
 
     await say(answer);
+
+    logger.debug("message completed");
   } catch (error) {
     logger.error(error);
   }
 });
 
 app.command("/fate", async ({ command, ack, say }) => {
+  logger.debug("/fate", command);
+
   try {
     await ack(); // Acknowledge command request
     const answer = await openAICommand.tellMeMyFate();
@@ -75,12 +85,16 @@ app.command("/fate", async ({ command, ack, say }) => {
         },
       ],
     });
+
+    logger.debug("/fate completed");
   } catch (error) {
     logger.error(error);
   }
 });
 
 app.command("/gen_image", async ({ command, ack, say }) => {
+  logger.debug("/gen_image", command);
+
   try {
     await ack(); // Acknowledge command request
     const base64Str = await openAICommand.generateImage(command.text);
@@ -103,6 +117,8 @@ app.command("/gen_image", async ({ command, ack, say }) => {
       filetype: "auto",
       title: command.text,
     });
+
+    logger.debug("/gen_image completed");
   } catch (error) {
     logger.error(error);
   }
@@ -113,4 +129,5 @@ app.command("/gen_image", async ({ command, ack, say }) => {
   await app.start();
 
   logger.log("⚡️ Bolt app is running!");
+  logger.log("log level: ", logger.level);
 })();

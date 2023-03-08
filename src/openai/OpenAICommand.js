@@ -51,7 +51,7 @@ class OpenAICommand {
       this.config.chat.ttl
     );
 
-    logger.log("cached messages: ", this.cache.get(id));
+    logger.debug("cached messages: ", this.cache.get(id));
 
     return res;
   }
