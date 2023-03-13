@@ -26,11 +26,20 @@ class OpenAICommand {
   async chat(id, message, options) {
     // get last messages from cache
     let lastMessages = this.cache.get(id) ?? [];
+    // If chat is enabled and there are enough messages to summarize, summarize the last messages
+    if (
+      this.config.chat.enableSummarize &&
+      lastMessages.length >= this.getNumOfMessages()
+    ) {
+      const summary = await this.summarizeMessages(lastMessages);
+      lastMessages = [{ role: roles.SYSTEM, content: summary }];
+    }
+    // Add the user's message to the array of messages
     lastMessages = [...lastMessages, { role: roles.USER, content: message }];
-    // consider response from OpenAI, we keep only the last N - 1 messages
+    // Consider response from OpenAI, we keep only the last N - 1 messages
     lastMessages = lastMessages.slice(-this.getNumOfMessages() + 1);
 
-    const systemMessages = this.config.chat.systemMessage
+    const predefinedSystemMessages = this.config.chat.systemMessage
       ? [
           {
             role: roles.SYSTEM,
@@ -40,7 +49,7 @@ class OpenAICommand {
       : [];
 
     const res = await this.createChatCompletion(
-      [...systemMessages, ...lastMessages],
+      [...predefinedSystemMessages, ...lastMessages],
       options
     );
 
@@ -54,6 +63,18 @@ class OpenAICommand {
     logger.debug("cached messages: ", this.cache.get(id));
 
     return res;
+  }
+
+  async summarizeMessages(messages) {
+    return await this.createChatCompletion(
+      {
+        role: roles.USER,
+        content: `summarize the following messages shortly: ${JSON.stringify(
+          messages
+        )}`,
+      },
+      { temperature: 0.0 }
+    );
   }
 
   getNumOfMessages() {

@@ -18,6 +18,7 @@ module.exports = {
   openAI: {
     apiKey: process.env.OPENAI_API_KEY,
     chat: {
+      enableSummarize: process.env.OPENAI_CHAT_ENABLE_SUMMARIZE === "true",
       numOfMessages: getInt("OPENAI_CHAT_NUM_OF_MESSAGES", 2),
       ttl: getInt("OPENAI_CHAT_TTL", null),
       systemMessage: process.env.OPENAI_CHAT_SYSTEM_MESSAGE,
