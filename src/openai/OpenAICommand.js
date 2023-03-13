@@ -8,21 +8,6 @@ class OpenAICommand {
     this.config = config;
   }
 
-  async createCompletion(prompt, options) {
-    const completion = await this.openAIApi.createCompletion({
-      model: "text-davinci-003",
-      prompt: prompt,
-      temperature: 0.7,
-      max_tokens: 1000,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      ...options,
-    });
-
-    return completion.data.choices[0].text;
-  }
-
   async chat(id, message, options) {
     // get last messages from cache
     let lastMessages = this.cache.get(id) ?? [];
@@ -91,23 +76,6 @@ class OpenAICommand {
     return numOfMessages;
   }
 
-  async createSingleChatCompletion(role, message, options) {
-    return await this.createChatCompletion(
-      [{ role, content: message }],
-      options
-    );
-  }
-
-  async createChatCompletion(messages, options) {
-    const completion = await this.openAIApi.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages,
-      ...options,
-    });
-
-    return completion.data.choices[0].message.content;
-  }
-
   async tellMeMyFate() {
     const now = new Date();
     return await this.createSingleChatCompletion(
@@ -122,13 +90,57 @@ class OpenAICommand {
     );
   }
 
+  async createSingleChatCompletion(role, message, options) {
+    return await this.createChatCompletion(
+      [{ role, content: message }],
+      options
+    );
+  }
+
+  async createCompletion(prompt, options) {
+    logger.debug("Create completion parameters: ", prompt, options);
+
+    const res = await this.openAIApi.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      temperature: 0.7,
+      max_tokens: 1000,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      ...options,
+    });
+
+    logger.debug("Create completion response: ", res);
+
+    return res.data.choices[0].text;
+  }
+
+  async createChatCompletion(messages, options) {
+    logger.debug("Create chat completion parameters: ", messages, options);
+
+    const res = await this.openAIApi.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages,
+      ...options,
+    });
+
+    logger.debug("Create chat completion response: ", res);
+
+    return res.data.choices[0].message.content;
+  }
+
   async generateImage(prompt) {
+    logger.debug("Create image parameters: ", prompt);
+
     const res = await this.openAIApi.createImage({
       prompt: prompt,
       n: 1,
       size: "512x512",
       response_format: "b64_json",
     });
+
+    logger.debug("Create image response: ", res);
 
     return res.data.data[0].b64_json;
   }
