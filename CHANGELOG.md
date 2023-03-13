@@ -1,3 +1,50 @@
+## v1.4.0 (2023-03-13)
+
+## v1.4.0-beta.1 (2023-03-13)
+
+### Feat
+
+- **src/app.js**: send error message to slack
+
+### Fix
+
+- **openai/OpenAICommand.js**: fix summarize message
+
+## v1.4.0-beta.0 (2023-03-13)
+
+### Feat
+
+- summarize last conversations if OPENAI_CHAT_ENABLE_SUMMARIZE is enabled
+
+### Refactor
+
+- **openai/OpenAICommand.js**: reoder function, add more debug logs around OpenAI API
+
+## v1.3.2 (2023-03-08)
+
+### Feat
+
+- set log level at env and more debug logs
+
+## v1.3.1 (2023-03-07)
+
+### Fix
+
+- **src/Cache.js**: don't throw error when key is undefined or null
+
+## v1.3.0 (2023-03-06)
+
+### Feat
+
+- **src/app.js**: handle message event
+- add logger
+
+## v1.2.1 (2023-03-06)
+
+### Fix
+
+- rename src/Config.js -> src/config.js
+
 ## v1.2.0 (2023-03-06)
 
 ### Feat
