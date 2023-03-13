@@ -52,12 +52,14 @@ class OpenAICommand {
 
   async summarizeMessages(messages) {
     return await this.createChatCompletion(
-      {
-        role: roles.USER,
-        content: `summarize the following messages shortly: ${JSON.stringify(
-          messages
-        )}`,
-      },
+      [
+        {
+          role: roles.USER,
+          content: `summarize the following messages shortly: ${JSON.stringify(
+            messages
+          )}`,
+        },
+      ],
       { temperature: 0.0 }
     );
   }
