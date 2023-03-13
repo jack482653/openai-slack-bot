@@ -47,6 +47,8 @@ app.event("app_mention", async ({ event, say }) => {
     logger.debug("app_mention completed");
   } catch (error) {
     logger.error(error);
+
+    await say("Oops, something went wrong 😭. Please try again later.");
   }
 });
 
@@ -64,6 +66,8 @@ app.message(async ({ event, say }) => {
     logger.debug("message completed");
   } catch (error) {
     logger.error(error);
+
+    await say("Oops, something went wrong 😭. Please try again later.");
   }
 });
 
@@ -89,6 +93,8 @@ app.command("/fate", async ({ command, ack, say }) => {
     logger.debug("/fate completed");
   } catch (error) {
     logger.error(error);
+
+    await say("Oops, something went wrong 😭. Please try again later.");
   }
 });
 
@@ -121,6 +127,8 @@ app.command("/gen_image", async ({ command, ack, say }) => {
     logger.debug("/gen_image completed");
   } catch (error) {
     logger.error(error);
+
+    await say("Oops, something went wrong 😭. Please try again later.");
   }
 });
 
