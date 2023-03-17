@@ -50,6 +50,23 @@ class OpenAICommand {
     return res;
   }
 
+  async summarizeConversations(locale, conversations) {
+    logger.debug(conversations.join("\n"));
+    return await this.createChatCompletion(
+      [
+        {
+          role: roles.USER,
+          content:
+            `#lang:${locale} ` +
+            "Use conversations language to summarize the following text very shortly, " +
+            "with the most unique and helpful points: \n" +
+            conversations.join("\n"),
+        },
+      ],
+      { temperature: 0.0 }
+    );
+  }
+
   async summarizeMessages(messages) {
     return await this.createChatCompletion(
       [
