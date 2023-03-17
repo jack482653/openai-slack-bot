@@ -1,5 +1,6 @@
 const roles = require("./roles");
-const logger = require("../logger").getLogger("OpenAICommand");
+const { log4js } = require("../configurations/logger");
+const logger = log4js.getLogger("OpenAICommand");
 
 class OpenAICommand {
   constructor(openAIApi, cache, config) {
