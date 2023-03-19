@@ -22,6 +22,14 @@ This document is polished by ChatGPT :P .
 ```
 <img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/209779765-bd0892e9-fded-4a80-9d7c-4c0b3933accb.png">
 
+- Summary the thread:
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/226178335-291dce6b-6d5e-4cb2-bcc4-832711b764ae.gif">
+
+- Ask the question based on the conversations in the thread:
+
+<img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/226178649-cd30db19-86e1-4bb1-a836-ec54a93896a7.gif">
+
 ## Prerequisites
 
 ### OpenAI
@@ -93,7 +101,7 @@ settings:
 2. Enable Socket Mode on the `Socket Mode` page.
 3. On the `OAuth & Permissions` page, add the following scopes to `Scopes > Bot Token Scopes`:
 
-![image](https://user-images.githubusercontent.com/6816342/223335220-42e4c2dd-cc83-4392-8960-3378fdd6433d.png)
+<img width="660" alt="image" src="https://user-images.githubusercontent.com/6816342/226178765-6d325f69-3a6b-4183-aa92-58a2082eb6d8.png">
 
 4. Enable Events and subscribe to the `app_mention` and `message.im` bot events on the `Event Subscriptions` page:
 
@@ -101,9 +109,13 @@ settings:
 
 5. Add the `/gen_image` command on the `Slash Commands` page:
 
-![image](https://user-images.githubusercontent.com/6816342/209769980-5a618c3f-8c07-4023-b036-ad026f792329.png)
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/209769980-5a618c3f-8c07-4023-b036-ad026f792329.png">
 
-6. Obtain the following keys and add them to a `.env` file at the root of the project directory:
+6. Add `summarize` and `ask` shortcuts on the `Interactivity & Shortcuts` page:
+
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/226179176-9966de71-e3dd-4d5c-b1de-7f1135287809.png">
+
+7. Obtain the following keys and add them to a `.env` file at the root of the project directory:
   - `SLACK_SIGNING_SECRET`: found under `Basic Information > App Credentials > Signing Secret`
   - `SLACK_BOT_TOKEN`: found under `OAuth & Permissions > Bot User OAuth Token`
   - `SLACK_APP_TOKEN`: found under `Basic Information > App-Level Tokens`, click on the token name to obtain it
