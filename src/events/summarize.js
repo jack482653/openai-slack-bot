@@ -1,7 +1,8 @@
 const app = require("../configurations/app");
-const { openAICommand } = require("../configurations/openai");
+const cache = require("../configurations/cache");
+const openAICommand = require("../configurations/openai");
 const { appLogger: logger } = require("../configurations/logger");
-const { pagination } = require("../helpers/slack");
+const { getThreadMessages } = require("../helpers/slack");
 
 app.shortcut("summarize", async ({ shortcut, ack, client }) => {
   logger.debug("/summarize", shortcut);
@@ -85,27 +86,10 @@ app.view("summarize_submission", async ({ ack, body, client }) => {
 
   try {
     await ack();
-    // TODO: Too many implementations exposed at app.js, need to refactor
-    // Get all replies in the thread
-    const replies = await pagination(
-      client.conversations.replies,
-      {
-        channel: channelId,
-        ts: threadTs,
-      },
-      "messages"
-    );
-    // Construct messages to summarize
-    const messages = await Promise.all(
-      replies.map(async (message) => {
-        // TODO: cache user info to reuse
-        const user = await client.users.info({
-          user: message.user,
-        });
-        return `${user.user.profile.real_name}: ${message.text}`;
-      })
-    );
-
+    const messages = await getThreadMessages(channelId, threadTs, {
+      client,
+      cache,
+    });
     const answer = await openAICommand.summarizeConversations(locale, messages);
     const { permalink } = await client.chat.getPermalink({
       channel: channelId,

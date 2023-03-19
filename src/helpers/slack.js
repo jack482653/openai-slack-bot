@@ -18,6 +18,36 @@ const pagination = (func, params, key) => {
   return loop().then(() => results);
 };
 
+const getThreadMessages = async (channelId, threadTs, { client, cache }) => {
+  // Get all replies in the thread
+  const replies = await pagination(
+    client.conversations.replies,
+    {
+      channel: channelId,
+      ts: threadTs,
+    },
+    "messages"
+  );
+
+  // Construct messages to summarize
+  const messages = await Promise.all(
+    replies.map(async (message) => {
+      let user = cache.get(`user_${message.user}`);
+      if (!user) {
+        user = await client.users.info({
+          user: message.user,
+        });
+
+        cache.set(`user_${message.user}`, user, 60 * 60);
+      }
+      return `${user.user.profile.real_name}: ${message.text}`;
+    })
+  );
+
+  return messages;
+};
+
 module.exports = {
   pagination,
+  getThreadMessages,
 };
