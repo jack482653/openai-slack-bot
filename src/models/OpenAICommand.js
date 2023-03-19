@@ -51,15 +51,38 @@ class OpenAICommand {
     return res;
   }
 
+  async askQuestionInTheThread(locale, question, conversations) {
+    logger.debug("Locale: ", locale);
+    logger.debug("Question: ", question);
+    logger.debug("Conversations: ", conversations.join("\n"));
+
+    return await this.createChatCompletion(
+      [
+        {
+          role: roles.USER,
+          content:
+            `#lang:${locale} Answer the question based on the following conversation:\n` +
+            `[conversation start]\n${conversations.join(
+              "\n"
+            )}\n[conversation end]\n` +
+            `Question: ${question}`,
+        },
+      ],
+      { temperature: 0.0 }
+    );
+  }
+
   async summarizeConversations(locale, conversations) {
-    logger.debug(conversations.join("\n"));
+    logger.debug("Locale: ", locale);
+    logger.debug("Conversations: ", conversations.join("\n"));
+
     return await this.createChatCompletion(
       [
         {
           role: roles.USER,
           content:
             `#lang:${locale} ` +
-            "Use conversations language to summarize the following text very shortly, " +
+            "Summarize the following text very shortly, " +
             "with the most unique and helpful points: \n" +
             conversations.join("\n"),
         },

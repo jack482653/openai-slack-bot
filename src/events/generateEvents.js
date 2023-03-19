@@ -1,5 +1,6 @@
 const EVENTS = [
   "appMention",
+  "ask",
   "fate",
   "generateEvents",
   "genImage",
