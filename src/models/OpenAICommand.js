@@ -11,7 +11,7 @@ class OpenAICommand {
 
   async chat(id, message, options) {
     // get last messages from cache
-    let lastMessages = this.cache.get(id) ?? [];
+    let lastMessages = this.cache.get(`conversation-${id}`) ?? [];
     // If chat is enabled and there are enough messages to summarize, summarize the last messages
     if (
       this.config.chat.enableSummarize &&
@@ -41,7 +41,7 @@ class OpenAICommand {
 
     // Add the assistant's response to the array of messages and update the cache
     this.cache.set(
-      id,
+      `conversation-${id}`,
       [...lastMessages, { role: roles.ASSISTANT, content: res }],
       this.config.chat.ttl
     );
