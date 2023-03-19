@@ -1,3 +1,17 @@
+## v1.5.0 (2023-03-19)
+
+### Feat
+
+- **models/OpenAICommand.js**: add prefix in key when accessing cache
+- **events/ask.js**: ask the question in the thread
+- **src/app.js**: summarize thread
+- **src/app.js**: handle singal
+
+### Refactor
+
+- extract code
+- adjust project src files structure
+
 ## v1.4.0 (2023-03-13)
 
 ## v1.4.0-beta.1 (2023-03-13)
