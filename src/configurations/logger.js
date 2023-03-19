@@ -12,4 +12,4 @@ log4js.configure({
   },
 });
 
-module.exports = log4js;
+module.exports = { log4js, appLogger: log4js.getLogger("app") };

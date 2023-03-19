@@ -1,5 +1,6 @@
 const roles = require("./roles");
-const logger = require("../logger").getLogger("OpenAICommand");
+const { log4js } = require("../configurations/logger");
+const logger = log4js.getLogger("OpenAICommand");
 
 class OpenAICommand {
   constructor(openAIApi, cache, config) {
@@ -10,7 +11,7 @@ class OpenAICommand {
 
   async chat(id, message, options) {
     // get last messages from cache
-    let lastMessages = this.cache.get(id) ?? [];
+    let lastMessages = this.cache.get(`conversation-${id}`) ?? [];
     // If chat is enabled and there are enough messages to summarize, summarize the last messages
     if (
       this.config.chat.enableSummarize &&
@@ -40,7 +41,7 @@ class OpenAICommand {
 
     // Add the assistant's response to the array of messages and update the cache
     this.cache.set(
-      id,
+      `conversation-${id}`,
       [...lastMessages, { role: roles.ASSISTANT, content: res }],
       this.config.chat.ttl
     );
@@ -48,6 +49,46 @@ class OpenAICommand {
     logger.debug("cached messages: ", this.cache.get(id));
 
     return res;
+  }
+
+  async askQuestionInTheThread(locale, question, conversations) {
+    logger.debug("Locale: ", locale);
+    logger.debug("Question: ", question);
+    logger.debug("Conversations: ", conversations.join("\n"));
+
+    return await this.createChatCompletion(
+      [
+        {
+          role: roles.USER,
+          content:
+            `#lang:${locale} Answer the question based on the following conversation:\n` +
+            `[conversation start]\n${conversations.join(
+              "\n"
+            )}\n[conversation end]\n` +
+            `Question: ${question}`,
+        },
+      ],
+      { temperature: 0.0 }
+    );
+  }
+
+  async summarizeConversations(locale, conversations) {
+    logger.debug("Locale: ", locale);
+    logger.debug("Conversations: ", conversations.join("\n"));
+
+    return await this.createChatCompletion(
+      [
+        {
+          role: roles.USER,
+          content:
+            `#lang:${locale} ` +
+            "Summarize the following text very shortly, " +
+            "with the most unique and helpful points: \n" +
+            conversations.join("\n"),
+        },
+      ],
+      { temperature: 0.0 }
+    );
   }
 
   async summarizeMessages(messages) {
