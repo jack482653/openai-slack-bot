@@ -1,3 +1,9 @@
+## v1.5.1 (2023-03-22)
+
+### Fix
+
+- **models/OpenAICommand.js**: debug log of getting cache value
+
 ## v1.5.0 (2023-03-19)
 
 ### Feat
