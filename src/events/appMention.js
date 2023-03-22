@@ -1,3 +1,4 @@
+const env = require("../configurations/env");
 const app = require("../configurations/app");
 const openAICommand = require("../configurations/openai");
 const { appLogger: logger } = require("../configurations/logger");
@@ -10,6 +11,13 @@ app.event("app_mention", async ({ event, say }) => {
     const answer = await openAICommand.chat(id, event.text, {
       user: id,
     });
+    const userTextWithQuote = event.text
+      .split("\n")
+      .map((w) => `>${w}`)
+      .join("\n");
+    const answerText = env.slack.appMention.quoteUserMessage
+      ? `<@${event.user}>\n${userTextWithQuote}\n${answer}`
+      : `<@${event.user}> ${answer}`;
 
     await say({
       text: answer,
@@ -18,7 +26,7 @@ app.event("app_mention", async ({ event, say }) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `<@${event.user}> ${answer}`,
+            text: answerText,
           },
         },
       ],
