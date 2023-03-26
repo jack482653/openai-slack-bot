@@ -22,8 +22,10 @@ class OpenAICommand {
     }
     // Add the user's message to the array of messages
     lastMessages = [...lastMessages, { role: roles.USER, content: message }];
-    // Consider response from OpenAI, we keep only the last N - 1 messages
-    lastMessages = lastMessages.slice(-this.getNumOfMessages() + 1);
+    if (!this.config.chat.enableSummarize) {
+      // Consider response from OpenAI, we keep only the last N - 1 messages
+      lastMessages = lastMessages.slice(-this.getNumOfMessages() + 1);
+    }
 
     const predefinedSystemMessages = this.config.chat.systemMessage
       ? [
