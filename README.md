@@ -6,7 +6,7 @@ Inspired by [@kvzhuang](https://gist.github.com/kvzhuang). Original source code 
 
 This document is polished by ChatGPT :P .
 
-## Functions
+# Functions
 
 - Mention bot and ask the bot a question at channel. Tt will generate a response:
 
@@ -30,15 +30,15 @@ This document is polished by ChatGPT :P .
 
 <img width="693" alt="image" src="https://user-images.githubusercontent.com/6816342/226178649-cd30db19-86e1-4bb1-a836-ec54a93896a7.gif">
 
-## Prerequisites
+# Prerequisites
 
-### OpenAI
+## OpenAI
 
 - Obtain an OpenAI API key.
 
-### Slack
+## Slack
 
-#### Use App Manifest
+### Use App Manifest
 
 You can easily create a pre-configured Slack app by [click this link](https://api.slack.com/apps?new_app=1&manifest_yaml=display_information%3A%0A%20%20name%3A%20OpenAI%20Chat%0A%20%20description%3A%20An%20OpenAI%20Slack%20bot%0Afeatures%3A%0A%20%20app_home%3A%0A%20%20%20%20home_tab_enabled%3A%20false%0A%20%20%20%20messages_tab_enabled%3A%20true%0A%20%20%20%20messages_tab_read_only_enabled%3A%20false%0A%20%20bot_user%3A%0A%20%20%20%20display_name%3A%20OpenAI%20Chat%0A%20%20%20%20always_online%3A%20true%0A%20%20shortcuts%3A%0A%20%20%20%20-%20name%3A%20Summarize...%0A%20%20%20%20%20%20type%3A%20message%0A%20%20%20%20%20%20callback_id%3A%20summarize%0A%20%20%20%20%20%20description%3A%20Summarize%20this%20thread...%0A%20%20%20%20-%20name%3A%20Ask%20something...%0A%20%20%20%20%20%20type%3A%20message%0A%20%20%20%20%20%20callback_id%3A%20ask%0A%20%20%20%20%20%20description%3A%20Ask%20the%20question%20in%20the%20thread%0A%20%20slash_commands%3A%0A%20%20%20%20-%20command%3A%20%2Fgen_image%0A%20%20%20%20%20%20description%3A%20Generate%20image%20from%20OpenAI%0A%20%20%20%20%20%20usage_hint%3A%20%22%5Ba%20white%20siamese%20cat%5D%22%0A%20%20%20%20%20%20should_escape%3A%20false%0Aoauth_config%3A%0A%20%20scopes%3A%0A%20%20%20%20bot%3A%0A%20%20%20%20%20%20-%20app_mentions%3Aread%0A%20%20%20%20%20%20-%20channels%3Ahistory%0A%20%20%20%20%20%20-%20chat%3Awrite%0A%20%20%20%20%20%20-%20chat%3Awrite.customize%0A%20%20%20%20%20%20-%20chat%3Awrite.public%0A%20%20%20%20%20%20-%20commands%0A%20%20%20%20%20%20-%20files%3Awrite%0A%20%20%20%20%20%20-%20groups%3Ahistory%0A%20%20%20%20%20%20-%20im%3Ahistory%0A%20%20%20%20%20%20-%20users%3Aread%0Asettings%3A%0A%20%20event_subscriptions%3A%0A%20%20%20%20bot_events%3A%0A%20%20%20%20%20%20-%20app_mention%0A%20%20%20%20%20%20-%20message.im%0A%20%20interactivity%3A%0A%20%20%20%20is_enabled%3A%20true%0A%20%20org_deploy_enabled%3A%20false%0A%20%20socket_mode_enabled%3A%20true%0A%20%20token_rotation_enabled%3A%20false).
 
@@ -95,7 +95,7 @@ settings:
   token_rotation_enabled: false
 ```
 
-#### Manual
+### Manual
 
 1. Create a new app and install it to your workspace through the [Slack API](https://api.slack.com/apps).
 2. Enable Socket Mode on the `Socket Mode` page.
@@ -139,11 +139,26 @@ OPENAI_CHAT_TTL=1200
 OPENAI_CHAT_SYSTEM_MESSAGE="You are a helpful assistant."
 ```
 
-## Getting Started
+# Getting Started
 
 To get started with the bot, follow these steps:
 
 1. Install the necessary dependencies by running `yarn install`
+
 2. Start the bot by running `yarn start`
 
 Alternatively, you can use docker by running `docker-compose up`.
+
+# Insight
+
+openai-slack-bot integrates Helicone to monitor their usage, latency, and costs of OpenAI:
+
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/227770247-4de265fa-ee1b-4630-bb17-7ad67818d75b.png">
+
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/6816342/227770354-9d23a3a4-bcb7-48b3-8eef-45ee8e94f243.png">
+
+
+## Step
+1. Go to [Helicone.ai](https://www.helicone.ai/) and register an account if you don't have one.
+2. On step 2, add the OpenAI key you used in the bot:
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/227769528-786b9333-c72e-4479-9ce0-f5ac03db5faa.png">
