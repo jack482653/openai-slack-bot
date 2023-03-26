@@ -1,3 +1,20 @@
+## v1.6.1 (2023-03-26)
+
+### Feat
+
+- **configurations/openai.js**: integrate Helicone
+
+### Fix
+
+- **models/OpenAICommand.js**: summary message may lost
+
+## v1.6.0 (2023-03-22)
+
+### Feat
+
+- **events/appMention.js**: add quoted user message in the responded slack message
+- add SLACK_APP_MENTION_QUOTE_USER_MESSAGE env
+
 ## v1.5.1 (2023-03-22)
 
 ### Fix
