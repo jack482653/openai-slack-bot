@@ -78,7 +78,7 @@ describe("OpenAICommand", () => {
 
       await openAICommand.chat("id", "message 1");
 
-      const cachedMessages = fakeCache.get("id");
+      const cachedMessages = fakeCache.get("conversation-id");
       expect(cachedMessages.length).to.eq(2);
       expect(cachedMessages[0]).to.deep.eq({
         role: roles.USER,
@@ -100,7 +100,7 @@ describe("OpenAICommand", () => {
       await openAICommand.chat("id", "message 2");
       await openAICommand.chat("id", "message 3");
 
-      const cachedMessages = fakeCache.get("id");
+      const cachedMessages = fakeCache.get("conversation-id");
       expect(cachedMessages.length).to.eq(4);
       expect(cachedMessages[0]).to.deep.eq({
         role: roles.USER,
