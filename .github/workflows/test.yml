@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Run tests
-        run: yarn test --reporter json > test-results.json
+        run: yarn test --reporter json --reporter-options output=test-results.json
       - uses: actions/upload-artifact@v2  # upload test results
         if: success() || failure()        # run this step even if previous step failed
         with:
