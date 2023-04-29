@@ -18,9 +18,10 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Run tests
         run: yarn test --reporter json --reporter-options output=test-results.json
-      - uses: actions/upload-artifact@v2  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
         with:
-          name: test-results
+          name: Tests
           path: test-results.json
           reporter: mocha-json
