@@ -1,4 +1,5 @@
 const log4js = require("log4js");
+const env = require("./env");
 
 log4js.configure({
   appenders: {
@@ -7,7 +8,7 @@ log4js.configure({
   categories: {
     default: {
       appenders: ["console"],
-      level: process.env.LOG_LEVEL || "info",
+      level: env.logLevel,
     },
   },
 });

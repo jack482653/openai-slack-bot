@@ -10,6 +10,7 @@ const getInt = (key, defaultValue) => {
 
 module.exports = {
   port: getInt("PORT", 3000),
+  logLevel: process.env.LOG_LEVEL || "info",
   slack: {
     botToken: process.env.SLACK_BOT_TOKEN,
     signingSecret: process.env.SLACK_SIGNING_SECRET,
