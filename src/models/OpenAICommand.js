@@ -1,4 +1,8 @@
 const roles = require("./roles");
+const apiTypes = require("./apiTypes");
+const models = require("./models");
+const InvalidModelError = require("../errors/InvalidModelError");
+const ModelTypeNotMatchedError = require("../errors/ModelTypeNotMatchedError");
 const { log4js } = require("../configurations/logger");
 const logger = log4js.getLogger("OpenAICommand");
 
@@ -7,6 +11,17 @@ class OpenAICommand {
     this.openAIApi = openAIApi;
     this.cache = cache;
     this.config = config;
+
+    if (!models.isValidModel(this.config.chat.model)) {
+      throw new InvalidModelError("OPENAI_CHAT_MODEL", this.config.chat.model);
+    }
+    if (!models.isMatchType(this.config.chat.model, apiTypes.CHAT)) {
+      throw new ModelTypeNotMatchedError(
+        "OPENAI_CHAT_MODEL",
+        apiTypes.CHAT,
+        this.config.chat.model
+      );
+    }
   }
 
   async chat(id, message, options) {
@@ -146,7 +161,7 @@ class OpenAICommand {
     logger.debug("Create completion parameters: ", prompt, options);
 
     const res = await this.openAIApi.createCompletion({
-      model: "text-davinci-003",
+      model: models.TEXT_DAVINCI_003,
       prompt: prompt,
       temperature: 0.7,
       max_tokens: 1000,
@@ -165,7 +180,7 @@ class OpenAICommand {
     logger.debug("Create chat completion parameters: ", messages, options);
 
     const res = await this.openAIApi.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: this.config.chat.model,
       messages,
       ...options,
     });
