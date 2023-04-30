@@ -1,5 +1,8 @@
 # openai-slack-bot
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jack482653/openai-slack-bot/workflow.yml?label=Test%20%26%20Build&style=for-the-badge)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jack482653/openai-slack-bot?label=Version&style=for-the-badge)
+
 A Slack bot that uses the OpenAI API to generate responses and images based on user prompts.
 
 Inspired by [@kvzhuang](https://gist.github.com/kvzhuang). Original source code can be found [here](https://gist.github.com/kvzhuang/357b83499d3edcc099512d47a4a1b646).
