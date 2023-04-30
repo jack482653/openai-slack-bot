@@ -1,4 +1,5 @@
 require("dotenv").config();
+const models = require("../models/models");
 
 const getInt = (key, defaultValue) => {
   const value = process.env[key];
@@ -23,7 +24,7 @@ module.exports = {
   openAI: {
     apiKey: process.env.OPENAI_API_KEY,
     chat: {
-      model: process.env.OPENAI_CHAT_MODEL,
+      model: process.env.OPENAI_CHAT_MODEL || models.GPT_3_5_TURBO,
       enableSummarize: process.env.OPENAI_CHAT_ENABLE_SUMMARIZE === "true",
       numOfMessages: getInt("OPENAI_CHAT_NUM_OF_MESSAGES", 2),
       ttl: getInt("OPENAI_CHAT_TTL", null),
