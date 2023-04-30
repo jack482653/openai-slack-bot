@@ -1,3 +1,22 @@
+## v1.7.0 (2023-04-30)
+
+### Feat
+
+- **models/OpenAICommand.js**: support customized chat model
+- **errors/ModelTypeNotMatchedError.js**: add ModelTypeNotMatchedError
+- **errors/InvalidModelError.js**: add InvalidModelError
+- **models/apiTypes.js**: add OpenAI API tpyes
+- **models/models.js**: add OpenAI models
+- **configurations/env.js**: add openAI.chat.model
+
+### Fix
+
+- **configurations/env.js**: default value of OPENAI_CHAT_MODEL
+
+### Refactor
+
+- move log level to env
+
 ## v1.6.1 (2023-03-26)
 
 ### Feat
