@@ -1,6 +1,9 @@
 const { expect } = require("chai");
 const OpenAICommand = require("./OpenAICommand");
 const roles = require("./roles");
+const models = require("./models");
+const InvalidModelError = require("../errors/InvalidModelError");
+const ModelTypeNotMatchedError = require("../errors/ModelTypeNotMatchedError");
 
 const fakeOpenAIApi = {
   createChatCompletion: () => {
@@ -33,12 +36,32 @@ class FakeCache {
 }
 
 describe("OpenAICommand", () => {
+  describe("constructor", () => {
+    it("should throw an error when chat model is invalid", () => {
+      expect(
+        () =>
+          new OpenAICommand(fakeOpenAIApi, {}, { chat: { model: "invalid" } })
+      ).to.throw(InvalidModelError);
+    });
+
+    it("should throw an error when chat model is not a chat model", () => {
+      expect(
+        () =>
+          new OpenAICommand(
+            fakeOpenAIApi,
+            {},
+            { chat: { model: models.WHISPER_1 } }
+          )
+      ).to.throw(ModelTypeNotMatchedError);
+    });
+  });
+
   describe("getNumOfMessages", () => {
     it("should throw an error when numOfMessages is < 2", () => {
       const openAICommand = new OpenAICommand(
         fakeOpenAIApi,
         {},
-        { chat: { numOfMessages: 1 } }
+        { chat: { model: models.GPT_3_5_TURBO, numOfMessages: 1 } }
       );
 
       expect(() => openAICommand.getNumOfMessages()).to.throw(
@@ -50,7 +73,7 @@ describe("OpenAICommand", () => {
       const openAICommand = new OpenAICommand(
         fakeOpenAIApi,
         {},
-        { chat: { numOfMessages: 3 } }
+        { chat: { model: models.GPT_3_5_TURBO, numOfMessages: 3 } }
       );
 
       expect(() => openAICommand.getNumOfMessages()).to.throw(
@@ -62,7 +85,7 @@ describe("OpenAICommand", () => {
       const openAICommand = new OpenAICommand(
         fakeOpenAIApi,
         {},
-        { chat: { numOfMessages: 4 } }
+        { chat: { model: models.GPT_3_5_TURBO, numOfMessages: 4 } }
       );
 
       expect(openAICommand.getNumOfMessages()).to.eq(4);
@@ -73,12 +96,12 @@ describe("OpenAICommand", () => {
     it("cache should all messages when messages <= numOfMessages", async () => {
       const fakeCache = new FakeCache();
       const openAICommand = new OpenAICommand(fakeOpenAIApi, fakeCache, {
-        chat: { numOfMessages: 4 },
+        chat: { model: models.GPT_3_5_TURBO, numOfMessages: 4 },
       });
 
       await openAICommand.chat("id", "message 1");
 
-      const cachedMessages = fakeCache.get("id");
+      const cachedMessages = fakeCache.get("conversation-id");
       expect(cachedMessages.length).to.eq(2);
       expect(cachedMessages[0]).to.deep.eq({
         role: roles.USER,
@@ -93,14 +116,14 @@ describe("OpenAICommand", () => {
     it("cache should only last numOfMessages when messages > numOfMessages", async () => {
       const fakeCache = new FakeCache();
       const openAICommand = new OpenAICommand(fakeOpenAIApi, fakeCache, {
-        chat: { numOfMessages: 4 },
+        chat: { model: models.GPT_3_5_TURBO, numOfMessages: 4 },
       });
 
       await openAICommand.chat("id", "message 1");
       await openAICommand.chat("id", "message 2");
       await openAICommand.chat("id", "message 3");
 
-      const cachedMessages = fakeCache.get("id");
+      const cachedMessages = fakeCache.get("conversation-id");
       expect(cachedMessages.length).to.eq(4);
       expect(cachedMessages[0]).to.deep.eq({
         role: roles.USER,
