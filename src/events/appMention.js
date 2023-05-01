@@ -1,7 +1,7 @@
-const env = require("../configurations/env");
-const app = require("../configurations/app");
-const openAICommand = require("../configurations/openai");
-const { appLogger: logger } = require("../configurations/logger");
+const env = require("@configs/env");
+const app = require("@configs/app");
+const openAICommand = require("@configs/openai");
+const { appLogger: logger } = require("@configs/logger");
 
 app.event("app_mention", async ({ event, say }) => {
   logger.debug("app_mention", event);

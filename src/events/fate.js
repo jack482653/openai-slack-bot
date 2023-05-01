@@ -1,6 +1,6 @@
-const app = require("../configurations/app");
-const openAICommand = require("../configurations/openai");
-const { appLogger: logger } = require("../configurations/logger");
+const app = require("@configs/app");
+const openAICommand = require("@configs/openai");
+const { appLogger: logger } = require("@configs/logger");
 
 app.command("/fate", async ({ command, ack, say }) => {
   logger.debug("/fate", command);

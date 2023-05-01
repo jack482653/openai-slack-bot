@@ -1,9 +1,9 @@
 const roles = require("./roles");
 const apiTypes = require("./apiTypes");
 const models = require("./models");
-const InvalidModelError = require("../errors/InvalidModelError");
-const ModelTypeNotMatchedError = require("../errors/ModelTypeNotMatchedError");
-const { log4js } = require("../configurations/logger");
+const InvalidModelError = require("@errors/InvalidModelError");
+const ModelTypeNotMatchedError = require("@errors/ModelTypeNotMatchedError");
+const { log4js } = require("@configs/logger");
 const logger = log4js.getLogger("OpenAICommand");
 
 class OpenAICommand {

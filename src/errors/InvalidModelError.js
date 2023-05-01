@@ -1,4 +1,4 @@
-const models = require("../models/models");
+const models = require("@models/models");
 
 class InvalidModelError extends Error {
   constructor(configName, currentModel) {

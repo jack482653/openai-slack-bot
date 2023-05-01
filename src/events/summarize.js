@@ -1,8 +1,8 @@
-const app = require("../configurations/app");
-const cache = require("../configurations/cache");
-const openAICommand = require("../configurations/openai");
-const { appLogger: logger } = require("../configurations/logger");
-const { getThreadMessages } = require("../helpers/slack");
+const app = require("@configs/app");
+const cache = require("@configs/cache");
+const openAICommand = require("@configs/openai");
+const { appLogger: logger } = require("@configs/logger");
+const { getThreadMessages } = require("@helpers/slack");
 
 app.shortcut("summarize", async ({ shortcut, ack, client }) => {
   logger.debug("/summarize", shortcut);
