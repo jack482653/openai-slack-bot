@@ -2,6 +2,6 @@
   "recursive": true,
   "reporter": "nyan",
   "ui": "bdd",
-  "require": "dotenv/config",
+  "require": ["dotenv/config", "module-alias/register"],
   "spec": ["src/**/*.test.js"]
 }
