@@ -14,6 +14,7 @@
     "@slack/bolt": "^3.12.2",
     "dotenv": "^16.0.3",
     "log4js": "^6.8.0",
+    "module-alias": "^2.2.2",
     "node-cache": "^5.1.2",
     "openai": "^3.2.1",
     "request": "^2.88.2"
@@ -22,5 +23,12 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "prettier": "2.8.1"
+  },
+  "_moduleAliases": {
+    "@configs": "src/configs",
+    "@errors": "src/errors",
+    "@events": "src/events",
+    "@helpers": "src/helpers",
+    "@models": "src/models"
   }
 }
