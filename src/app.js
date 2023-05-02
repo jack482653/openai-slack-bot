@@ -1,6 +1,6 @@
-const app = require("./configurations/app");
-const { appLogger: logger } = require("./configurations/logger");
-const generateEvents = require("./events/generateEvents");
+const app = require("#configs/app");
+const { appLogger: logger } = require("#configs/logger");
+const generateEvents = require("#events/generateEvents");
 
 generateEvents();
 
