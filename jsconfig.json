@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2022",
+    "baseUrl": "./src",
+    "paths": {
+      "#configs/*": ["./configurations/*"],
+      "#errors/*": ["./errors/*.js"],
+      "#events/*": ["./events/*"],
+      "#helpers/*": ["./helpers/*"],
+      "#models/*": ["./models/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

@@ -9,6 +9,13 @@
   },
   "author": "Kevin Zhuang",
   "license": "ISC",
+  "imports": {
+    "#configs/*": "./src/configurations/*.js",
+    "#errors/*": "./src/errors/*.js",
+    "#events/*": "./src/events/*.js",
+    "#helpers/*": "./src/helpers/*.js",
+    "#models/*": "./src/models/*.js"
+  },
   "dependencies": {
     "@5x/enumjs": "^1.0.6",
     "@slack/bolt": "^3.12.2",

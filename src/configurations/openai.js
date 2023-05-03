@@ -1,7 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
 const cache = require("./cache");
-const OpenAICommand = require("../models/OpenAICommand");
 const env = require("./env");
+const OpenAICommand = require("#models/OpenAICommand");
 
 const configuration = new Configuration({
   apiKey: env.openAI.apiKey,

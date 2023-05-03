@@ -1,5 +1,5 @@
 require("dotenv").config();
-const models = require("../models/models");
+const models = require("#models/models");
 
 const getInt = (key, defaultValue) => {
   const value = process.env[key];

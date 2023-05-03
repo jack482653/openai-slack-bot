@@ -2,8 +2,8 @@ const { expect } = require("chai");
 const OpenAICommand = require("./OpenAICommand");
 const roles = require("./roles");
 const models = require("./models");
-const InvalidModelError = require("../errors/InvalidModelError");
-const ModelTypeNotMatchedError = require("../errors/ModelTypeNotMatchedError");
+const InvalidModelError = require("#errors/InvalidModelError");
+const ModelTypeNotMatchedError = require("#errors/ModelTypeNotMatchedError");
 
 const fakeOpenAIApi = {
   createChatCompletion: () => {
