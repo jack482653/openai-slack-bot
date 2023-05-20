@@ -124,6 +124,7 @@ settings:
   - `SLACK_APP_TOKEN`: found under `Basic Information > App-Level Tokens`, click on the token name to obtain it
   - `SLACK_APP_MENTION_QUOTE_USER_MESSAGE`: If enabled, user's message will be added as quote before response message when you mention bot. Default value: false.
   - `OPENAI_API_KEY`
+  - `OPENAI_BASE_PATH`: base path used in OpenAI Library. Overwrite it if you want to use endpoint of OpenAI or Azure OpenAI service. Default: `https://oai.hconeai.com/v1`
   - `OPENAI_CHAT_MODEL`: Which chat model you want to use. Be careful your money when you use gpt-4 :P. See [available models](https://platform.openai.com/docs/models/overview). Default value: gpt-3.5-turbo.
   - `OPENAI_CHAT_ENABLE_SUMMARIZE`: If enabled, it will call OpenAPI chat completion to summarize previous conversioations when number of messages cached >= `OPENAI_CHAT_NUM_OF_MESSAGES`. Default value: false.
   - `OPENAI_CHAT_NUM_OF_MESSAGES`: Number of messages bot will cache. It's used for appending previous conversioations when calling chat completions API. MUST BE EVEN. Default value: 2.
