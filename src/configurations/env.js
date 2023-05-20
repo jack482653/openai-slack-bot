@@ -23,6 +23,7 @@ module.exports = {
   },
   openAI: {
     apiKey: process.env.OPENAI_API_KEY,
+    basePath: process.env.OPENAI_BASE_PATH || "https://oai.hconeai.com/v1",
     chat: {
       model: process.env.OPENAI_CHAT_MODEL || models.GPT_3_5_TURBO,
       enableSummarize: process.env.OPENAI_CHAT_ENABLE_SUMMARIZE === "true",

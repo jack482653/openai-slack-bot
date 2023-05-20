@@ -5,6 +5,7 @@ COPY ./package.json /opt/openai-slack-bot/
 COPY ./yarn.lock /opt/openai-slack-bot/
 
 ENV OPENAI_API_KEY=""
+ENV OPENAI_BASE_PATH=""
 ENV SLACK_BOT_TOKEN=""
 ENV SLACK_SIGNING_SECRET=""
 ENV SLACK_APP_TOKEN=""

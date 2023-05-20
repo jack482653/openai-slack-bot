@@ -5,7 +5,7 @@ const OpenAICommand = require("#models/OpenAICommand");
 
 const configuration = new Configuration({
   apiKey: env.openAI.apiKey,
-  basePath: "https://oai.hconeai.com/v1",
+  basePath: env.openAI.basePath,
 });
 const openAIApi = new OpenAIApi(configuration);
 const openAICommand = new OpenAICommand(openAIApi, cache, env.openAI);
