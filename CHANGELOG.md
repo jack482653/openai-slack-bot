@@ -1,3 +1,15 @@
+## v1.8.0 (2023-06-14)
+
+### Feat
+
+- **models/models.js**: add new gpt models
+
+## v1.7.1 (2023-05-03)
+
+### Refactor
+
+- alias
+
 ## v1.7.0 (2023-04-30)
 
 ### Feat
