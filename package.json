@@ -8,7 +8,7 @@
     "test": "mocha"
   },
   "author": "Kevin Zhuang",
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "imports": {
     "#configs/*": "./src/configurations/*.js",
     "#errors/*": "./src/errors/*.js",
