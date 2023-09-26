@@ -119,21 +119,37 @@ settings:
 <img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/226179176-9966de71-e3dd-4d5c-b1de-7f1135287809.png">
 
 7. Obtain the following keys and add them to a `.env` file at the root of the project directory:
-  - `SLACK_SIGNING_SECRET`: found under `Basic Information > App Credentials > Signing Secret`
-  - `SLACK_BOT_TOKEN`: found under `OAuth & Permissions > Bot User OAuth Token`
-  - `SLACK_APP_TOKEN`: found under `Basic Information > App-Level Tokens`, click on the token name to obtain it
-  - `SLACK_APP_MENTION_QUOTE_USER_MESSAGE`: If enabled, user's message will be added as quote before response message when you mention bot. Default value: false.
-  - `OPENAI_API_KEY`
-  - `OPENAI_CHAT_MODEL`: Which chat model you want to use. Be careful your money when you use gpt-4 :P. See [available models](https://platform.openai.com/docs/models/overview). Default value: gpt-3.5-turbo.
-  - `OPENAI_CHAT_ENABLE_SUMMARIZE`: If enabled, it will call OpenAPI chat completion to summarize previous conversioations when number of messages cached >= `OPENAI_CHAT_NUM_OF_MESSAGES`. Default value: false.
-  - `OPENAI_CHAT_NUM_OF_MESSAGES`: Number of messages bot will cache. It's used for appending previous conversioations when calling chat completions API. MUST BE EVEN. Default value: 2.
-  - `OPENAI_CHAT_TTL`: The duration of time (second) that messages will be kept. Default value: null (keep forever).
-  - `OPENAI_CHAT_SYSTEM_MESSAGE`: First messsage to help set the behavior of the assistant. Default value: null.
+    1. Slack
+        - `SLACK_SIGNING_SECRET`: found under `Basic Information > App Credentials > Signing Secret`
+        - `SLACK_BOT_TOKEN`: found under `OAuth & Permissions > Bot User OAuth Token`
+        - `SLACK_APP_TOKEN`: found under `Basic Information > App-Level Tokens`, click on the token name to obtain it
+        - `SLACK_APP_MENTION_QUOTE_USER_MESSAGE`: If enabled, user's message will be added as quote before response message when you mention bot. Default value: false.
+    2. OpenAI auth
+      You can use different OpenAI providers by setting `OPENAI_PROVIDER` to `openai` or `azure`. Each provider has different environment variables.
+        1. OpenAI
+            - `OPENAI_PROVIDER=openai`
+            - `OPENAI_OPENAI_AUTH_API_KEY`: OpenAI API key
+            - `OPENAI_OPENAI_AUTH_BASE_PATH`: OpenAI API base path.
+        2. Azure
+            - `OPENAI_PROVIDER=azure`
+            - `OPENAI_AZURE_AUTH_API_BASE`: Azure API base path
+            - `OPENAI_AZURE_AUTH_DEPLOYMENT_NAME`: Azure API deployment name
+            - `OPENAI_AZURE_AUTH_API_VERSION`: Azure API version
+            - `OPENAI_AZURE_AUTH_API_KEY`: Azure API key
+    3. Common OpenAI settings
+        - `OPENAI_CHAT_MODEL`: Which chat model you want to use. Be careful your money when you use gpt-4 :P. See [available models](https://platform.openai.com/docs/models/overview). Default value: gpt-3.5-turbo.
+        - `OPENAI_CHAT_ENABLE_SUMMARIZE`: If enabled, it will call OpenAPI chat completion to summarize previous conversioations when number of messages cached >= `OPENAI_CHAT_NUM_OF_MESSAGES`. Default value: false.
+        - `OPENAI_CHAT_NUM_OF_MESSAGES`: Number of messages bot will cache. It's used for appending previous conversioations when calling chat completions API. MUST BE EVEN. Default value: 2.
+        - `OPENAI_CHAT_TTL`: The duration of time (second) that messages will be kept. Default value: null (keep forever).
+        - `OPENAI_CHAT_SYSTEM_MESSAGE`: First messsage to help set the behavior of the assistant. Default value: null.
+
+IMPORTANT: If you are using Azure as OpenAI provider, you cannot use `/gen_image` command.
 
 Your `.env` file should look like this:
 
 ```
-OPENAI_API_KEY=xxxxxxx
+OPENAI_PROVIDER=openai
+OPENAI_OPENAI_AUTH_API_KEY=xxxxxxx
 SLACK_BOT_TOKEN=xoxb-xxxxxxx
 SLACK_SIGNING_SECRET=xxxxxx
 SLACK_APP_TOKEN=xapp-xxxxxx
