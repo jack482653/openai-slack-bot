@@ -1,3 +1,11 @@
+## v1.9.0 (2023-09-26)
+
+### Feat
+
+- **configurations/openai.js**: add azure provider support
+- **configurations/env.js**: add azure provider support
+- **models/providers.js**: add providers enum
+
 ## v1.8.0 (2023-06-14)
 
 ### Feat
