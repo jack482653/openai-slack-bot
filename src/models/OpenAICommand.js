@@ -160,7 +160,7 @@ class OpenAICommand {
   async createCompletion(prompt, options) {
     logger.debug("Create completion parameters: ", prompt, options);
 
-    const res = await this.openAIApi.createCompletion({
+    const res = await this.openAIApi.completions.create({
       model: models.TEXT_DAVINCI_003,
       prompt: prompt,
       temperature: 0.7,
@@ -173,13 +173,13 @@ class OpenAICommand {
 
     logger.debug("Create completion response: ", res);
 
-    return res.data.choices[0].text;
+    return res.choices[0].text;
   }
 
   async createChatCompletion(messages, options) {
     logger.debug("Create chat completion parameters: ", messages, options);
 
-    const res = await this.openAIApi.createChatCompletion({
+    const res = await this.openAIApi.chat.completions.create({
       model: this.config.chat.model,
       messages,
       ...options,
@@ -187,13 +187,13 @@ class OpenAICommand {
 
     logger.debug("Create chat completion response: ", res);
 
-    return res.data.choices[0].message.content;
+    return res.choices[0].message.content;
   }
 
   async generateImage(prompt) {
     logger.debug("Create image parameters: ", prompt);
 
-    const res = await this.openAIApi.createImage({
+    const res = await this.openAIApi.images.generate({
       prompt: prompt,
       n: 1,
       size: "512x512",
@@ -202,7 +202,7 @@ class OpenAICommand {
 
     logger.debug("Create image response: ", res);
 
-    return res.data.data[0].b64_json;
+    return res.data[0].b64_json;
   }
 }
 

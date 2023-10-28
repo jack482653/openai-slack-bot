@@ -1,4 +1,4 @@
-FROM node:16.15.0-alpine
+FROM node:18.12.0-alpine
 
 COPY ./src /opt/openai-slack-bot/src
 COPY ./package.json /opt/openai-slack-bot/

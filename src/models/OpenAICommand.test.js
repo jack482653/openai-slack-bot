@@ -6,18 +6,20 @@ const InvalidModelError = require("#errors/InvalidModelError");
 const ModelTypeNotMatchedError = require("#errors/ModelTypeNotMatchedError");
 
 const fakeOpenAIApi = {
-  createChatCompletion: () => {
-    return {
-      data: {
-        choices: [
-          {
-            message: {
-              content: "This is response from OpenAI.",
+  chat: {
+    completions: {
+      create: () => {
+        return {
+          choices: [
+            {
+              message: {
+                content: "This is response from OpenAI.",
+              },
             },
-          },
-        ],
+          ],
+        };
       },
-    };
+    },
   },
 };
 
