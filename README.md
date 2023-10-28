@@ -170,7 +170,7 @@ To get started with the bot, follow these steps:
 
 Alternatively, you can use docker by running `docker-compose up`.
 
-# Insight
+<!-- # Insight
 
 openai-slack-bot integrates Helicone to monitor their usage, latency, and costs of OpenAI:
 
@@ -182,4 +182,4 @@ openai-slack-bot integrates Helicone to monitor their usage, latency, and costs 
 ## Step
 1. Go to [Helicone.ai](https://www.helicone.ai/) and register an account if you don't have one.
 2. On step 2, add the OpenAI key you used in the bot:
-<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/227769528-786b9333-c72e-4479-9ce0-f5ac03db5faa.png">
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/6816342/227769528-786b9333-c72e-4479-9ce0-f5ac03db5faa.png"> -->
