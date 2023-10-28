@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 const cache = require("./cache");
 const env = require("./env");
 const OpenAICommand = require("#models/OpenAICommand");
@@ -9,18 +9,16 @@ const getConfig = (provider, auth) => {
     case providers.AZURE:
       return {
         apiKey: auth.apiKey,
-        basePath: auth.basePath,
-        baseOptions: {
-          headers: { "api-key": auth.apiKey },
-          params: {
-            "api-version": auth.apiVersion,
-          },
+        baseURL: auth.basePath,
+        defaultHeaders: { "api-key": auth.apiKey },
+        defaultQuery: {
+          "api-version": auth.apiVersion,
         },
       };
     case providers.OPENAI:
       return {
         apiKey: auth.apiKey,
-        basePath: auth.basePath,
+        baseURL: auth.basePath,
       };
     default:
       return {
@@ -29,10 +27,8 @@ const getConfig = (provider, auth) => {
   }
 };
 
-const configuration = new Configuration(
-  getConfig(env.openAI.provider, env.openAI.auth)
-);
-const openAIApi = new OpenAIApi(configuration);
+const openAIApi = new OpenAI(getConfig(env.openAI.provider, env.openAI.auth));
+
 const openAICommand = new OpenAICommand(openAIApi, cache, env.openAI);
 
 module.exports = openAICommand;
