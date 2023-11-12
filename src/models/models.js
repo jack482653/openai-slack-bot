@@ -3,10 +3,18 @@ const apiTypes = require("./apiTypes");
 
 const models = new Enum();
 // /v1/chat/completions:
+// gpt-4-1106-preview, gpt-4-vision-preview
 // gpt-4, gpt-4-0314, gpt-4-0613
 // gpt-4-32k, gpt-4-32k-0314, gpt-4-32k-0613
+// gpt-3.5-turbo-1106
 // gpt-3.5-turbo, gpt-3.5-turbo-0301, gpt-3.5-turbo-0613
 // gpt-3.5-turbo-16k, gpt-3.5-turbo-16k-0613
+models.defineEnumProperty("GPT_4_1106_PREVIEW", "gpt-4-1106-preview", {
+  types: [apiTypes.CHAT],
+});
+models.defineEnumProperty("GPT_4_VISION_PREVIEW", "gpt-4-vision-preview", {
+  types: [apiTypes.CHAT],
+});
 models.defineEnumProperty("GPT_4", "gpt-4", { types: [apiTypes.CHAT] });
 // Discontinued date: 2023/09/13
 models.defineEnumProperty("GPT_4_0314", "gpt-4-0314", {
@@ -21,6 +29,9 @@ models.defineEnumProperty("GPT_4_32K_0314", "gpt-4-32k-0314", {
   types: [apiTypes.CHAT],
 });
 models.defineEnumProperty("GPT_4_32K_0613", "gpt-4-32k-0613", {
+  types: [apiTypes.CHAT],
+});
+models.defineEnumProperty("GPT_3_5_TURBO_1106", "gpt-3.5-turbo-1106", {
   types: [apiTypes.CHAT],
 });
 models.defineEnumProperty("GPT_3_5_TURBO", "gpt-3.5-turbo", {
@@ -96,6 +107,16 @@ models.defineEnumProperty("TEXT_MODERATION_STABLE", "text-moderation-stable", {
 models.defineEnumProperty("TEXT_MODERATION_LATEST", "text-moderation-latest", {
   types: [apiTypes.MODERATIONS],
 });
+
+// /v1/images:
+// dall-e-3, dall-e-2
+models.defineEnumProperty("DALL_E_3", "dall-e-3", { types: [apiTypes.IMAGES] });
+models.defineEnumProperty("DALL_E_2", "dall-e-2", { types: [apiTypes.IMAGES] });
+
+// /v1/audio/speech:
+// tts-1, tts-1-hd
+models.defineEnumProperty("TTS_1", "tts-1", { types: [apiTypes.TTS] });
+models.defineEnumProperty("TTS_1_HD", "tts-1-hd", { types: [apiTypes.TTS] });
 
 const isValidModel = (model) => {
   return models.values().includes(model);
