@@ -2,8 +2,6 @@ const { expect } = require("chai");
 const OpenAICommand = require("./OpenAICommand");
 const roles = require("./roles");
 const models = require("./models");
-const InvalidModelError = require("#errors/InvalidModelError");
-const ModelTypeNotMatchedError = require("#errors/ModelTypeNotMatchedError");
 
 const fakeOpenAIApi = {
   chat: {
@@ -39,14 +37,14 @@ class FakeCache {
 
 describe("OpenAICommand", () => {
   describe("constructor", () => {
-    it("should throw an error when chat model is invalid", () => {
+    it("should not throw an error when chat model is invalid", () => {
       expect(
         () =>
           new OpenAICommand(fakeOpenAIApi, {}, { chat: { model: "invalid" } })
-      ).to.throw(InvalidModelError);
+      ).to.not.throw();
     });
 
-    it("should throw an error when chat model is not a chat model", () => {
+    it("should not throw an error when chat model is not a chat model", () => {
       expect(
         () =>
           new OpenAICommand(
@@ -54,7 +52,7 @@ describe("OpenAICommand", () => {
             {},
             { chat: { model: models.WHISPER_1 } }
           )
-      ).to.throw(ModelTypeNotMatchedError);
+      ).to.not.throw();
     });
   });
 

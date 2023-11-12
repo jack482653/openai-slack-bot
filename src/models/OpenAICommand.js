@@ -1,8 +1,6 @@
 const roles = require("./roles");
 const apiTypes = require("./apiTypes");
 const models = require("./models");
-const InvalidModelError = require("#errors/InvalidModelError");
-const ModelTypeNotMatchedError = require("#errors/ModelTypeNotMatchedError");
 const { log4js } = require("#configs/logger");
 const logger = log4js.getLogger("OpenAICommand");
 
@@ -13,13 +11,13 @@ class OpenAICommand {
     this.config = config;
 
     if (!models.isValidModel(this.config.chat.model)) {
-      throw new InvalidModelError("OPENAI_CHAT_MODEL", this.config.chat.model);
+      logger.warn(
+        `The model ${this.config.chat.model} is not in the list of valid models. May be it is new model or typo. Please check the model name.`
+      );
     }
     if (!models.isMatchType(this.config.chat.model, apiTypes.CHAT)) {
-      throw new ModelTypeNotMatchedError(
-        "OPENAI_CHAT_MODEL",
-        apiTypes.CHAT,
-        this.config.chat.model
+      logger.warn(
+        `The model ${this.config.chat.model} is not in the list of chat models. May be it is new model or typo. Please check the model name.`
       );
     }
   }
