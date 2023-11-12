@@ -1,3 +1,11 @@
+## v1.11.0 (2023-11-12)
+
+### Feat
+
+- custom parameters in image generation
+- loose model checking
+- add new models
+
 ## v1.10.0 (2023-10-28)
 
 ## v1.10.0-beta.0 (2023-10-28)
