@@ -9,5 +9,7 @@ apiTypes.defineEnumProperty("TRANSLATIONS", "translations");
 apiTypes.defineEnumProperty("FINE_TUNES", "fine-tunes");
 apiTypes.defineEnumProperty("EMBEDDINGS", "embeddings");
 apiTypes.defineEnumProperty("MODERATIONS", "moderations");
+apiTypes.defineEnumProperty("IMAGES", "images");
+apiTypes.defineEnumProperty("TTS", "tts");
 
 module.exports = apiTypes;
