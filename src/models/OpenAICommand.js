@@ -192,9 +192,10 @@ class OpenAICommand {
     logger.debug("Create image parameters: ", prompt);
 
     const res = await this.openAIApi.images.generate({
+      model: this.config.image.model,
       prompt: prompt,
-      n: 1,
-      size: "512x512",
+      size: this.config.image.size,
+      quality: this.config.image.quality,
       response_format: "b64_json",
     });
 

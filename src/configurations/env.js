@@ -60,6 +60,11 @@ const getEnv = (config = {}) => {
         ttl: getInt("OPENAI_CHAT_TTL", null),
         systemMessage: process.env.OPENAI_CHAT_SYSTEM_MESSAGE,
       },
+      image: {
+        model: process.env.OPENAI_IMAGE_MODEL || models.DALL_E_2,
+        size: process.env.OPENAI_IMAGE_SIZE || "1024x1024",
+        quality: process.env.OPENAI_IMAGE_QUALITY || "standard",
+      },
     },
   };
 };
