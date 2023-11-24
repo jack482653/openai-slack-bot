@@ -7,7 +7,7 @@ app.message(async ({ event, say }) => {
 
   try {
     const id = event.user;
-    const answer = await openAICommand.chat(id, event.text, {
+    const answer = await openAICommand.chat(id, event.text || event.message.text, {
       user: id,
     });
 
