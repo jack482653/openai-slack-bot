@@ -6,10 +6,24 @@ const models = new Enum();
 // GPT-4o:
 // * gpt-4o
 // * gpt-4o-2024-05-13
+// * gpt-4o-2024-08-06
 models.defineEnumProperty("GPT_4O", "gpt-4o", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
 models.defineEnumProperty("GPT_4O_2024_05_13", "gpt-4o-2024-05-13", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("GPT_4O_2024_08_06", "gpt-4o-2024-08-06", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+
+// GPT-4o mini
+// * gpt-4o-mini
+// * gpt-4o-mini-2024-07-18
+models.defineEnumProperty("GPT_4O_MINI", "gpt-4o-mini", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("GPT_4O_MINI_2024_07_18", "gpt-4o-mini-2024-07-18", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
 
@@ -82,15 +96,6 @@ models.defineEnumProperty("TTS_1_HD", "tts-1-hd", { types: [modelTypes.TTS] });
 // whisper-1
 models.defineEnumProperty("WHISPER_1", "whisper-1", {
   types: [modelTypes.TRANSCRIPTIONS, modelTypes.TRANSLATIONS],
-});
-
-// /v1/edits:
-// text-davinci-edit-001, code-davinci-edit-001
-models.defineEnumProperty("TEXT_DAVINCI_EDIT_001", "text-davinci-edit-001", {
-  types: [modelTypes.EDITS],
-});
-models.defineEnumProperty("CODE_DAVINCI_EDIT_001", "code-davinci-edit-001", {
-  types: [modelTypes.EDITS],
 });
 
 // /v1/embeddings:
