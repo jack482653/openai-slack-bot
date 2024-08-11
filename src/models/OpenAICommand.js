@@ -1,5 +1,5 @@
 const roles = require("./roles");
-const apiTypes = require("./apiTypes");
+const modelTypes = require("./modelTypes");
 const models = require("./models");
 const { log4js } = require("#configs/logger");
 const logger = log4js.getLogger("OpenAICommand");
@@ -15,7 +15,7 @@ class OpenAICommand {
         `The model ${this.config.chat.model} is not in the list of valid models. May be it is new model or typo. Please check the model name.`
       );
     }
-    if (!models.isMatchType(this.config.chat.model, apiTypes.CHAT)) {
+    if (!models.isMatchType(this.config.chat.model, modelTypes.CHAT)) {
       logger.warn(
         `The model ${this.config.chat.model} is not in the list of chat models. May be it is new model or typo. Please check the model name.`
       );
