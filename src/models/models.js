@@ -5,15 +5,23 @@ const models = new Enum();
 // /v1/chat/completions:
 // GPT-4o:
 // * gpt-4o
-// * gpt-4o-2024-05-13
+// * gpt-4o-2024-11-20
 // * gpt-4o-2024-08-06
+// * gpt-4o-2024-05-13
+// * chatgpt-4o-latest
 models.defineEnumProperty("GPT_4O", "gpt-4o", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("GPT_4O_2024_11_20", "gpt-4o-2024-11-20", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("GPT_4O_2024_08_06", "gpt-4o-2024-08-06", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
 models.defineEnumProperty("GPT_4O_2024_05_13", "gpt-4o-2024-05-13", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
-models.defineEnumProperty("GPT_4O_2024_08_06", "gpt-4o-2024-08-06", {
+models.defineEnumProperty("CHATGPT_4O_LATEST", "chatgpt-4o-latest", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
 
@@ -26,6 +34,36 @@ models.defineEnumProperty("GPT_4O_MINI", "gpt-4o-mini", {
 models.defineEnumProperty("GPT_4O_MINI_2024_07_18", "gpt-4o-mini-2024-07-18", {
   types: [modelTypes.CHAT, modelTypes.VISION],
 });
+
+// o1:
+// * o1
+// * o1-2024-12-17
+// * o1-mini
+// * o1-mini-2024-09-12
+// * o1-preview
+// * o1-preview-2024-09-12
+models.defineEnumProperty("O1", "o1", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("O1_2024_12_17", "o1-2024-12-17", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("O1_MINI", "o1-mini", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("O1_MINI_2024_09_12", "o1-mini-2024-09-12", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("O1_PREVIEW", "o1-preview", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+models.defineEnumProperty("O1_PREVIEW_2024_09_12", "o1-preview-2024-09-12", {
+  types: [modelTypes.CHAT, modelTypes.VISION],
+});
+
+// TODO: GPT-4o and GPT-4o-mini Realtime
+
+// TODO: GPT-4o and GPT-4o-mini Audio
 
 // GPT-4 Turbo and GPT-4
 // * gpt-4-turbo
@@ -113,13 +151,25 @@ models.defineEnumProperty("TEXT_EMBEDDING_ADA_002", "text-embedding-ada-002", {
 });
 
 // /v1/moderations:
-// * text-moderation-stable
+// * omni-moderation-latest
+// * omni-moderation-2024-09-26
 // * text-moderation-latest
+// * text-moderation-stable
 // * text-moderation-007
-models.defineEnumProperty("TEXT_MODERATION_STABLE", "text-moderation-stable", {
+models.defineEnumProperty("OMNI_MODERATION_LATEST", "omni-moderation-latest", {
   types: [modelTypes.MODERATIONS],
 });
+models.defineEnumProperty(
+  "OMNI_MODERATION_2024_09_26",
+  "omni-moderation-2024-09-26",
+  {
+    types: [modelTypes.MODERATIONS],
+  }
+);
 models.defineEnumProperty("TEXT_MODERATION_LATEST", "text-moderation-latest", {
+  types: [modelTypes.MODERATIONS],
+});
+models.defineEnumProperty("TEXT_MODERATION_STABLE", "text-moderation-stable", {
   types: [modelTypes.MODERATIONS],
 });
 models.defineEnumProperty("TEXT_MODERATION_007", "text-moderation-007", {
