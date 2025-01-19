@@ -1,3 +1,16 @@
+## v1.12.0 (2025-01-19)
+
+### Feat
+
+- update model 2025/01/19
+- update model 8/11
+- integrate with content builder
+- add chat content builder
+- add new models
+- **configurations/env.js**: add enableMulti
+- add axois configuration
+- **.gitignore**: add
+
 ## v1.11.0 (2023-11-12)
 
 ### Feat
