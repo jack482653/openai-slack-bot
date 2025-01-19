@@ -19,6 +19,7 @@
   "dependencies": {
     "@5x/enumjs": "^1.0.6",
     "@slack/bolt": "^3.12.2",
+    "axios": "^1.7.2",
     "dotenv": "^16.0.3",
     "log4js": "^6.8.0",
     "node-cache": "^5.1.2",

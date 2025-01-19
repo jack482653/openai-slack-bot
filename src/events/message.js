@@ -1,13 +1,17 @@
 const app = require("#configs/app");
-const openAICommand = require("#configs/openai");
 const { appLogger: logger } = require("#configs/logger");
+const { openAICommand, getContentBuilderInstance } = require("#configs/openai");
 
 app.message(async ({ event, say }) => {
-  logger.debug("message", event);
-
   try {
+    const content = await getContentBuilderInstance()
+      .setText(event.text)
+      .setFiles(event.files)
+      .build();
+    logger.debug("generated content", content);
+
     const id = event.user;
-    const answer = await openAICommand.chat(id, event.text, {
+    const answer = await openAICommand.chat(id, content, {
       user: id,
     });
 

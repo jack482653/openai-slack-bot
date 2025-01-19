@@ -1,5 +1,5 @@
 const app = require("#configs/app");
-const openAICommand = require("#configs/openai");
+const { openAICommand } = require("#configs/openai");
 const { appLogger: logger } = require("#configs/logger");
 
 app.command("/gen_image", async ({ command, ack, say }) => {

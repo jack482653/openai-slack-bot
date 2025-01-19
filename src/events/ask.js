@@ -1,6 +1,6 @@
 const app = require("#configs/app");
 const cache = require("#configs/cache");
-const openAICommand = require("#configs/openai");
+const { openAICommand } = require("#configs/openai");
 const { appLogger: logger } = require("#configs/logger");
 const { getThreadMessages } = require("#helpers/slack");
 
